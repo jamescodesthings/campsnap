@@ -1,13 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
   <title>codesthings</title>
   <style>
-    .ink { stroke: #1b1f24; }
-    .stem { stroke: #8a5300; }
+    .ink, .stem { stroke: #14161d; }
     @media (prefers-color-scheme: dark) {
-      .ink { stroke: #e8ebef; }
-      .stem { stroke: #f5b84a; }
+      .ink { stroke: #f0ece4; }
+      .stem { stroke: #a9bce0; }
     }
   </style>
-  <path class="stem" d="M44 8 V44 A9 9 0 0 0 53 53 H56" fill="none" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
-  <path class="ink" d="M34.61 46.61 A15 15 0 1 1 24 21 H56" fill="none" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M44 8 V44 A9 9 0 0 0 53 53 H56" fill="none" class="stem" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M34.61 46.61 A15 15 0 1 1 24 21 H56" fill="none" class="ink" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
