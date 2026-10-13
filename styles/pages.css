@@ -175,3 +175,42 @@ footer a {
   font-size: .8rem;
   display: inline-block;
 }
+
+/* "Tag me": two plain buttons to the profiles, in the page's own black and white. */
+section.tag-me {
+  margin-bottom: 6rem;
+}
+
+ul.tag-me__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a.tag-me__button,
+a.tag-me__button:visited {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  min-height: 44px;
+  padding: 0 1.1rem;
+  color: var(--primary-color);
+  font-family: var(--font-mono-readable);
+  font-size: .9rem;
+  text-decoration: none;
+  border: 1px solid var(--secondary-color);
+  border-radius: .3rem;
+}
+
+a.tag-me__button:hover,
+a.tag-me__button:focus-visible {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.tag-me__handle {
+  color: var(--secondary-color);
+}
