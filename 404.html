@@ -1,31 +1,266 @@
 <!doctype html>
 <html lang="en">
   <head>
+    
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>404 - CampSnap Filters</title>
-    <link rel="icon" href="/campsnap/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/campsnap/favicon.ico" sizes="32x32" />
-    <link rel="apple-touch-icon" href="/campsnap/apple-touch-icon.png" />
-    <link rel="stylesheet" href="styles/normalize.css" />
-    <link rel="stylesheet" href="styles/pages.css" />
-    <style>
-      body {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      section.container {
-        text-align: center;
-      }
-    </style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Page not found · CampSnap Filters</title>
+<meta name="robots" content="noindex" />
+<meta name="color-scheme" content="dark light" />
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf8f4" />
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#090b12" />
+
+<link rel="icon" href="/campsnap/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/campsnap/favicon.ico" sizes="32x32" />
+<link rel="apple-touch-icon" href="/campsnap/apple-touch-icon.png" />
+<link rel="preload" href="/campsnap/static/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/campsnap/static/fonts/figtree-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/campsnap/static/fonts/geist-mono-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/campsnap/styles/normalize.css" />
+<link rel="stylesheet" href="/campsnap/styles/tokens.css" />
+<link rel="stylesheet" href="/campsnap/styles/site.css" />
+<script>(function () {
+  var root = document.documentElement;
+  var theme = 'dark';
+  var motion = null;
+  try {
+    var saved = localStorage.getItem('theme');
+    if (saved === 'dark' || saved === 'light' || saved === 'system') theme = saved;
+  } catch (e) {}
+  try {
+    motion = localStorage.getItem('motion');
+  } catch (e) {}
+  if (theme === 'system') {
+    var light = false;
+    try {
+      light = window.matchMedia('(prefers-color-scheme: light)').matches;
+    } catch (e) {}
+    theme = light ? 'light' : 'dark';
+  }
+  root.setAttribute('data-theme', theme);
+  // One theme-color tag for the theme showing, in place of head.ejs's two media-query tags.
+  try {
+    var metas = document.querySelectorAll('meta[name="theme-color"]');
+    for (var i = 0; i < metas.length; i++) metas[i].remove();
+    var meta = document.createElement('meta');
+    meta.name = 'theme-color';
+    meta.content = theme === 'light' ? '#faf8f4' : '#090b12';
+    document.head.appendChild(meta);
+  } catch (e) {}
+  if (motion === 'reduce' || motion === 'full') root.setAttribute('data-motion', motion);
+  root.setAttribute('data-js', '');
+})();
+</script>
+<script type="module" src="/campsnap/js/main.js"></script>
+
   </head>
   <body>
-    <section class="container">
-      <h1>404</h1>
-      <p>This page doesn't exist.</p>
-      <a href="./">Back to CampSnap Filters</a>
-    </section>
+    <a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header">
+  <div class="site-header__inner container">
+    <a class="site-header__home" href="/" aria-label="codesthings.com home"><svg class="logo logo--wordmark" xmlns="http://www.w3.org/2000/svg" viewBox="-3.5 -6 552.2 92" width="156" height="26" aria-hidden="true" focusable="false"><g transform="translate(0 0) scale(1.25)"><path d="M44 8 V44 A9 9 0 0 0 53 53 H56" fill="none" class="logo__accent" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M34.61 46.61 A15 15 0 1 1 24 21 H56" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g><g transform="translate(106 4) scale(0.9)"><g fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path transform="translate(0 0)" d="M34.14 25.86 A20 20 0 0 0 20 20 H20 A20 20 0 0 0 0 40 V40 A20 20 0 0 0 20 60 H20 A20 20 0 0 0 34.14 54.14"/><path transform="translate(49 0)" d="M20 20 H20 A20 20 0 0 1 40 40 V40 A20 20 0 0 1 20 60 H20 A20 20 0 0 1 0 40 V40 A20 20 0 0 1 20 20 Z"/><path transform="translate(102 0)" d="M20 20 H20 A20 20 0 0 1 40 40 V40 A20 20 0 0 1 20 60 H20 A20 20 0 0 1 0 40 V40 A20 20 0 0 1 20 20 Z M40 0 V60"/><path transform="translate(155 0)" d="M0 40 H40 A20 20 0 0 0 20 20 H20 A20 20 0 0 0 0 40 V40 A20 20 0 0 0 20 60 H20 A20 20 0 0 0 34.14 54.14"/><path transform="translate(208 0)" d="M30 20 H10 A10 10 0 0 0 10 40 H20 A10 10 0 0 1 20 60 H0"/><path transform="translate(251 0)" d="M8 4 V50 A10 10 0 0 0 18 60 H24 M0 20 H22"/><path transform="translate(286 0)" d="M0 0 V60 M0 40 A20 20 0 0 1 20 20 H20 A20 20 0 0 1 40 40 V60"/><path transform="translate(339 0)" d="M0 20 V60"/><path transform="translate(352 0)" d="M0 20 V60 M0 40 A20 20 0 0 1 20 20 H20 A20 20 0 0 1 40 40 V60"/><path transform="translate(405 0)" d="M20 20 H20 A20 20 0 0 1 40 40 V40 A20 20 0 0 1 20 60 H20 A20 20 0 0 1 0 40 V40 A20 20 0 0 1 20 20 Z M40 20 V66 A14 14 0 0 1 26 80 H6"/><path transform="translate(458 0)" d="M30 20 H10 A10 10 0 0 0 10 40 H20 A10 10 0 0 1 20 60 H0"/></g><circle cx="339" cy="6" r="5.04" class="logo__dot"/></g></svg>
+</a>
+    <div class="settings-pill">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch to light theme">
+        <span class="theme-toggle__orbit" aria-hidden="true">
+          <span class="theme-toggle__icon theme-toggle__icon--sun"><svg
+  class="icon "
+  width="20"
+  height="20"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></svg>
+</span>
+          <span class="theme-toggle__icon theme-toggle__icon--moon"><svg
+  class="icon "
+  width="20"
+  height="20"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></svg>
+</span>
+        </span>
+      </button>
+    </div>
+    <details class="site-menu">
+      <summary aria-label="Menu">
+        <span class="site-menu__icon-open"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="m6 9 6 6 6-6" /></svg>
+</span>
+        <span class="site-menu__icon-close"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
+</span>
+        <span class="site-menu__label">Menu</span>
+      </summary>
+      <nav class="site-nav" aria-label="Main">
+        <ul class="site-nav__list">
+          
+          <li><a class="site-nav__link" href="/#work">Work</a></li>
+          
+          <li><a class="site-nav__link" href="/#make">Make</a></li>
+          
+          <li><a class="site-nav__link" href="/#photos">Photos</a></li>
+          
+          <li><a class="site-nav__link" href="/#blog">Blog</a></li>
+          
+          <li><a class="site-nav__link" href="/now">Now</a></li>
+          
+        </ul>
+      </nav>
+    </details>
+  </div>
+</header>
+
+    <main id="main" class="container not-found">
+      <p class="eyebrow">404</p>
+      <h1 class="intro__title">This page doesn't exist</h1>
+      <p class="intro__lead">The filters are all on one page.</p>
+      <div class="intro__actions">
+        <a class="btn btn--primary" href="/campsnap/">Back to CampSnap Filters</a>
+      </div>
+    </main>
+    <footer class="site-footer">
+  <div class="site-footer__inner container">
+    <div class="site-footer__top">
+      <a href="/" class="footer-home" aria-label="codesthings.com home"><svg class="logo logo--wordmark" xmlns="http://www.w3.org/2000/svg" viewBox="-3.5 -6 552.2 92" width="144" height="24" aria-hidden="true" focusable="false"><g transform="translate(0 0) scale(1.25)"><path d="M44 8 V44 A9 9 0 0 0 53 53 H56" fill="none" class="logo__accent" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M34.61 46.61 A15 15 0 1 1 24 21 H56" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g><g transform="translate(106 4) scale(0.9)"><g fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path transform="translate(0 0)" d="M34.14 25.86 A20 20 0 0 0 20 20 H20 A20 20 0 0 0 0 40 V40 A20 20 0 0 0 20 60 H20 A20 20 0 0 0 34.14 54.14"/><path transform="translate(49 0)" d="M20 20 H20 A20 20 0 0 1 40 40 V40 A20 20 0 0 1 20 60 H20 A20 20 0 0 1 0 40 V40 A20 20 0 0 1 20 20 Z"/><path transform="translate(102 0)" d="M20 20 H20 A20 20 0 0 1 40 40 V40 A20 20 0 0 1 20 60 H20 A20 20 0 0 1 0 40 V40 A20 20 0 0 1 20 20 Z M40 0 V60"/><path transform="translate(155 0)" d="M0 40 H40 A20 20 0 0 0 20 20 H20 A20 20 0 0 0 0 40 V40 A20 20 0 0 0 20 60 H20 A20 20 0 0 0 34.14 54.14"/><path transform="translate(208 0)" d="M30 20 H10 A10 10 0 0 0 10 40 H20 A10 10 0 0 1 20 60 H0"/><path transform="translate(251 0)" d="M8 4 V50 A10 10 0 0 0 18 60 H24 M0 20 H22"/><path transform="translate(286 0)" d="M0 0 V60 M0 40 A20 20 0 0 1 20 20 H20 A20 20 0 0 1 40 40 V60"/><path transform="translate(339 0)" d="M0 20 V60"/><path transform="translate(352 0)" d="M0 20 V60 M0 40 A20 20 0 0 1 20 20 H20 A20 20 0 0 1 40 40 V60"/><path transform="translate(405 0)" d="M20 20 H20 A20 20 0 0 1 40 40 V40 A20 20 0 0 1 20 60 H20 A20 20 0 0 1 0 40 V40 A20 20 0 0 1 20 20 Z M40 20 V66 A14 14 0 0 1 26 80 H6"/><path transform="translate(458 0)" d="M30 20 H10 A10 10 0 0 0 10 40 H20 A10 10 0 0 1 20 60 H0"/></g><circle cx="339" cy="6" r="5.04" class="logo__dot"/></g></svg>
+</a>
+      <a href="/cv/" class="btn btn--primary"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" /><path d="M14 3v5h5" /><circle cx="9.5" cy="11" r="1.75" /><path d="M7 16c.4-1.3 1.3-2 2.5-2s2.1.7 2.5 2" /><path d="M14 11h2.5" /><path d="M14 14h2.5" /><path d="M7 18.5h9.5" /></svg>
+<span>View CV</span></a>
+    </div>
+    <nav aria-label="Footer">
+      <ul class="footer-links">
+        <li><a class="footer-link" href="/blog/">Blog</a></li>
+        <li><a class="footer-link" href="/feed.xml">RSS</a></li>
+        <li><a class="footer-link" href="/now">Now</a></li>
+        <li><a class="footer-link" href="/uses">Uses</a></li>
+        <li><a class="footer-link" href="/colophon">Colophon</a></li>
+        <li><a class="footer-link" href="/privacy-notice">Privacy Notice</a></li>
+        <li><a class="footer-link" href="/about-cookies">About Cookies</a></li>
+      </ul>
+    </nav>
+    <ul class="footer-social">
+      
+      <li>
+        <a class="footer-social__link" href="https://github.com/jamescodesthings" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)"><svg
+  class="icon "
+  width="20"
+  height="20"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" /><path d="M9 18c-4.51 2-5-2-7-2" /></svg>
+</a>
+      </li>
+      
+      <li>
+        <a class="footer-social__link" href="https://makerworld.com/en/@jamescodesthing" target="_blank" rel="noopener noreferrer" aria-label="Makerworld (opens in a new tab)"><svg
+  class="icon "
+  width="20"
+  height="20"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" /><path d="m3.3 7 8.7 5 8.7-5" /><path d="M12 22V12" /></svg>
+</a>
+      </li>
+      
+      <li>
+        <a class="footer-social__link" href="https://www.linkedin.com/in/jamescodesthings" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)"><svg
+  class="icon "
+  width="20"
+  height="20"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" /></svg>
+</a>
+      </li>
+      
+      <li>
+        <a class="footer-social__link" href="https://www.instagram.com/jamescodesthings/" target="_blank" rel="noopener noreferrer" aria-label="Instagram (opens in a new tab)"><svg
+  class="icon "
+  width="20"
+  height="20"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><rect x="2" y="2" width="20" height="20" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><path d="M17.5 6.5h.01" /></svg>
+</a>
+      </li>
+      
+    </ul>
+    <p class="footer-meta">
+      <span>&copy; 2026 James Macmillan</span>
+      <a href="https://github.com/jamescodesthings/campsnap" rel="noopener">This page on GitHub</a>
+    </p>
+  </div>
+</footer>
+
   </body>
 </html>

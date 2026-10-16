@@ -1,70 +1,1809 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CampSnap Filters? CampSnap Filters!</title>
-    <meta name="description" content="Filters for CampSnap, starting with the first pack of filters for the CampSnap Pro camera" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://codesthings.com/campsnap/" />
-    <meta property="og:title" content="CampSnap Pro Filters" />
-    <meta property="og:description" content="Filters for CampSnap, starting with the first pack of filters for the CampSnap Pro camera" />
-    <meta property="og:image" content="https://codesthings.com/campsnap/static/images/lab-archive-vol-1-cspro.cover.png" />
-    <meta property="og:image:alt" content="Lab Archive, Vol. I cover" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" href="/campsnap/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/campsnap/favicon.ico" sizes="32x32" />
-    <link rel="apple-touch-icon" href="/campsnap/apple-touch-icon.png" />
-    <link rel="stylesheet" href="styles/normalize.css" />
-    <link rel="stylesheet" href="styles/pages.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CampSnap Pro Filters · codesthings.com</title>
+<meta name="description" content="Filters for CampSnap, starting with the first pack of filters for the CampSnap Pro camera" />
+<link rel="canonical" href="https://codesthings.com/campsnap/" />
+<meta name="color-scheme" content="dark light" />
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf8f4" />
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#090b12" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="codesthings.com" />
+<meta property="og:url" content="https://codesthings.com/campsnap/" />
+<meta property="og:title" content="CampSnap Pro Filters · codesthings.com" />
+<meta property="og:description" content="Filters for CampSnap, starting with the first pack of filters for the CampSnap Pro camera" />
+<meta property="og:image" content="https://codesthings.com/campsnap/static/images/lab-archive-vol-1-cspro.cover.png" />
+<meta property="og:image:alt" content="Lab Archive, Vol. I cover" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" href="/campsnap/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/campsnap/favicon.ico" sizes="32x32" />
+<link rel="apple-touch-icon" href="/campsnap/apple-touch-icon.png" />
+<link rel="preload" href="static/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="static/fonts/figtree-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="static/fonts/geist-mono-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="styles/normalize.css" />
+<link rel="stylesheet" href="styles/tokens.css" />
+<link rel="stylesheet" href="styles/site.css" />
+<script>(function () {
+  var root = document.documentElement;
+  var theme = 'dark';
+  var motion = null;
+  try {
+    var saved = localStorage.getItem('theme');
+    if (saved === 'dark' || saved === 'light' || saved === 'system') theme = saved;
+  } catch (e) {}
+  try {
+    motion = localStorage.getItem('motion');
+  } catch (e) {}
+  if (theme === 'system') {
+    var light = false;
+    try {
+      light = window.matchMedia('(prefers-color-scheme: light)').matches;
+    } catch (e) {}
+    theme = light ? 'light' : 'dark';
+  }
+  root.setAttribute('data-theme', theme);
+  // One theme-color tag for the theme showing, in place of head.ejs's two media-query tags.
+  try {
+    var metas = document.querySelectorAll('meta[name="theme-color"]');
+    for (var i = 0; i < metas.length; i++) metas[i].remove();
+    var meta = document.createElement('meta');
+    meta.name = 'theme-color';
+    meta.content = theme === 'light' ? '#faf8f4' : '#090b12';
+    document.head.appendChild(meta);
+  } catch (e) {}
+  if (motion === 'reduce' || motion === 'full') root.setAttribute('data-motion', motion);
+  root.setAttribute('data-js', '');
+})();
+</script>
+<script type="module" src="js/main.js"></script>
+
   </head>
   <body>
-    <section class="container">
-      <section class="intro">
-        <h1>CampSnap Pro Filters</h1>
-        Filters for CampSnap, starting with the first pack of filters for the CampSnap Pro camera
-      </section>
-      
-      <div class="pack">
-        <a href="./packs/lab-archive-vol-1-cspro.zip">
-          <img
-            src="./static/images/lab-archive-vol-1-cspro.cover.png"
-            alt="Lab Archive, Vol. I cover"
-            class="cover-image"
-        /></a>
-        <div class="links">
-          <a href="./packs/lab-archive-vol-1-cspro.zip">Download Lab Archive, Vol. I</a>
+    <a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header">
+  <div class="site-header__inner container">
+    <a class="site-header__home" href="/" aria-label="codesthings.com home"><svg class="logo logo--wordmark" xmlns="http://www.w3.org/2000/svg" viewBox="-3.5 -6 552.2 92" width="156" height="26" aria-hidden="true" focusable="false"><g transform="translate(0 0) scale(1.25)"><path d="M44 8 V44 A9 9 0 0 0 53 53 H56" fill="none" class="logo__accent" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M34.61 46.61 A15 15 0 1 1 24 21 H56" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g><g transform="translate(106 4) scale(0.9)"><g fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path transform="translate(0 0)" d="M34.14 25.86 A20 20 0 0 0 20 20 H20 A20 20 0 0 0 0 40 V40 A20 20 0 0 0 20 60 H20 A20 20 0 0 0 34.14 54.14"/><path transform="translate(49 0)" d="M20 20 H20 A20 20 0 0 1 40 40 V40 A20 20 0 0 1 20 60 H20 A20 20 0 0 1 0 40 V40 A20 20 0 0 1 20 20 Z"/><path transform="translate(102 0)" d="M20 20 H20 A20 20 0 0 1 40 40 V40 A20 20 0 0 1 20 60 H20 A20 20 0 0 1 0 40 V40 A20 20 0 0 1 20 20 Z M40 0 V60"/><path transform="translate(155 0)" d="M0 40 H40 A20 20 0 0 0 20 20 H20 A20 20 0 0 0 0 40 V40 A20 20 0 0 0 20 60 H20 A20 20 0 0 0 34.14 54.14"/><path transform="translate(208 0)" d="M30 20 H10 A10 10 0 0 0 10 40 H20 A10 10 0 0 1 20 60 H0"/><path transform="translate(251 0)" d="M8 4 V50 A10 10 0 0 0 18 60 H24 M0 20 H22"/><path transform="translate(286 0)" d="M0 0 V60 M0 40 A20 20 0 0 1 20 20 H20 A20 20 0 0 1 40 40 V60"/><path transform="translate(339 0)" d="M0 20 V60"/><path transform="translate(352 0)" d="M0 20 V60 M0 40 A20 20 0 0 1 20 20 H20 A20 20 0 0 1 40 40 V60"/><path transform="translate(405 0)" d="M20 20 H20 A20 20 0 0 1 40 40 V40 A20 20 0 0 1 20 60 H20 A20 20 0 0 1 0 40 V40 A20 20 0 0 1 20 20 Z M40 20 V66 A14 14 0 0 1 26 80 H6"/><path transform="translate(458 0)" d="M30 20 H10 A10 10 0 0 0 10 40 H20 A10 10 0 0 1 20 60 H0"/></g><circle cx="339" cy="6" r="5.04" class="logo__dot"/></g></svg>
+</a>
+    <div class="settings-pill">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch to light theme">
+        <span class="theme-toggle__orbit" aria-hidden="true">
+          <span class="theme-toggle__icon theme-toggle__icon--sun"><svg
+  class="icon "
+  width="20"
+  height="20"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></svg>
+</span>
+          <span class="theme-toggle__icon theme-toggle__icon--moon"><svg
+  class="icon "
+  width="20"
+  height="20"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></svg>
+</span>
+        </span>
+      </button>
+    </div>
+    <details class="site-menu">
+      <summary aria-label="Menu">
+        <span class="site-menu__icon-open"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="m6 9 6 6 6-6" /></svg>
+</span>
+        <span class="site-menu__icon-close"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
+</span>
+        <span class="site-menu__label">Menu</span>
+      </summary>
+      <nav class="site-nav" aria-label="Main">
+        <ul class="site-nav__list">
+          
+          <li><a class="site-nav__link" href="/#work">Work</a></li>
+          
+          <li><a class="site-nav__link" href="/#make">Make</a></li>
+          
+          <li><a class="site-nav__link" href="/#photos">Photos</a></li>
+          
+          <li><a class="site-nav__link" href="/#blog">Blog</a></li>
+          
+          <li><a class="site-nav__link" href="/now">Now</a></li>
+          
+        </ul>
+      </nav>
+    </details>
+  </div>
+</header>
+
+    <main id="main">
+      <section class="intro container" aria-labelledby="intro-title">
+        <p class="eyebrow">Free filter pack · CampSnap Pro</p>
+        <h1 id="intro-title" class="intro__title">CampSnap Pro Filters</h1>
+        <p class="intro__lead">
+          23 film looks for the CampSnap Pro, free to download. See every filter with its sample shots, download one already named for the camera slot you want, or take the whole pack.
+        </p>
+        
+        <div class="intro__actions">
+          <a class="btn btn--primary" href="packs/lab-archive-vol-1-cspro.zip"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><rect width="20" height="5" x="2" y="3" rx="1" /><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8" /><path d="M10 12h4" /></svg>
+<span>Download all (ZIP)</span></a>
+          <a class="btn btn--secondary" href="packs/lab-archive-vol-1-cspro.pdf"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" /><path d="M14 2v4a2 2 0 0 0 2 2h4" /><path d="M10 9H8" /><path d="M16 13H8" /><path d="M16 17H8" /></svg>
+<span>Download the PDF</span></a>
         </div>
-        <p>Lab Archive, Vol. I is a deliberately curated ledger of looks drawn from the culture of consumer film, professional slide stocks, and the stray accidents that defined print-lab history.</p>
+        <p class="intro__meta">Lab Archive, Vol. I · 23 filters · <code>.flt</code> files for the CS Pro</p>
+        
+      </section>
+
+      <section id="tracker" class="tracker container" aria-labelledby="tracker-title" hidden>
+        <div class="tracker__card">
+          <div class="tracker__head">
+            <div>
+              <h2 id="tracker-title" class="tracker__title">Filter tracker</h2>
+              <p class="tracker__lede">What's on each slot of your camera.</p>
+            </div>
+            <div class="switch">
+              <label class="switch__label" for="tracker-auto">Auto-update</label>
+              <input id="tracker-auto" class="switch__input" type="checkbox" role="switch" checked aria-describedby="tracker-auto-tip" />
+              <span id="tracker-auto-tip" class="tooltip" role="tooltip">Download a filter for the slot you're filling and this keeps track for you.</span>
+            </div>
+          </div>
+          <ul id="tracker-rows" class="tracker__rows"></ul>
+          <p id="tracker-status" class="visually-hidden" aria-live="polite"></p>
+          <datalist id="tracker-filters">
+            <option value="Golden &#39;92"></option>
+            <option value="Eternal Hour"></option>
+            <option value="Street Cool"></option>
+            <option value="Deep Separation"></option>
+            <option value="Vivid Landscape"></option>
+            <option value="Crimson Dusk"></option>
+            <option value="Neutral Transparency"></option>
+            <option value="Complexion Priority"></option>
+            <option value="Pastel Shoulder"></option>
+            <option value="Ceremonial Wash"></option>
+            <option value="Drugstore Green"></option>
+            <option value="Instant Bloom"></option>
+            <option value="Pastel Memory"></option>
+            <option value="Classic Dispo"></option>
+            <option value="Crimson Register"></option>
+            <option value="Cool Lab Slip"></option>
+            <option value="Riviera Cyanotype"></option>
+            <option value="Chromatic Storybook"></option>
+            <option value="Isle of Ochre"></option>
+            <option value="Moody B&amp;W"></option>
+            <option value="Textured B&amp;W"></option>
+            <option value="Charcoal Depth"></option>
+            <option value="Neutral"></option>
+            
+          </datalist>
+        </div>
+        <p class="tracker__note">Saved in this browser only. <a href="/privacy-notice">Privacy notice</a></p>
+      </section>
+
+      <section id="how-to" class="page-section container how-to" aria-label="How to use">
+        <div class="prose how-to__body"><h2>How to Use</h2>
+<ol>
+<li>Choose your filter(s)</li>
+<li>Rename them to the filter name you want to replace: <code>std.flt</code>, <code>vtg1.flt</code>, <code>vtg2.flt</code>, <code>bw.flt</code></li>
+<li>Copy <code>.flt</code> files to your CampSnap Pro's memory card (at the root).</li>
+<li>Select a filter in-camera.</li>
+<li>Shoot with authentic film/video character baked in.</li>
+</ol>
+<hr /></div>
+        <p class="how-to__tip"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /><path d="M9 18h6" /><path d="M10 22h4" /></svg>
+<span>Any filter works in any slot: a colour look in the B&amp;W slot is fine, and so is the other way round.</span></p>
+      </section>
+
+      
+      <section id="filters" class="page-section container" aria-labelledby="filters-title">
+        <h2 id="filters-title" class="section-title">The filters</h2>
+        <p class="section-lede"><strong>Lab Archive, Vol. I</strong>: A catalogue of analogue behaviour for digital tools.</p>
+        <details class="pack-notes">
+          <summary>About this pack</summary>
+          <div class="prose"><p>Lab Archive, Vol. I is a deliberately curated ledger of looks drawn from the culture of consumer film, professional slide stocks, and the stray accidents that defined print-lab history.</p>
 <p>The intent is not nostalgia for its own sake, but a faithful cataloguing of palette, contrast behaviour, and tonal rolloff as they were commonly seen in the wild.</p>
 <p>Each filter is treated like an indexed process: a known response under daylight, tungsten, and mixed light; a recognizable bias in greens, skies, and skin.</p>
 <p>You are not buying a fantasy. You are acquiring a set of working behaviors you can call on with precision.</p>
 <p>Within the set you will find three families: everyday consumer color with characteristic warmth and scan bias; professional slide and negative references built for clarity and controlled saturation; and monochrome treatments that prioritize density, texture, and separation.</p>
 <p>Used well, these looks disappear into the work, the way a reliable stock disappears into a photographer's muscle memory.</p>
 <p>Best practice mirrors the darkroom: expose with intent, compose for contrast, and decide whether you need separation or mercy in the mids.</p>
-<p>This volume is a reference shelf-quiet, exact, and prepared for field use.</p>
-      </div>
-      
-      <section class="tag-me">
-        <h3>Show me what you shoot</h3>
-        <p>Posting photos taken with these filters? Tag me. I love seeing them out in the wild.</p>
-        <ul class="tag-me__links">
-          <li>
-            <a class="tag-me__button" href="https://www.instagram.com/jamescodesthings/" target="_blank" rel="noopener noreferrer">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><path d="M17.5 6.5h.01" /></svg>
-              <span>Instagram <span class="tag-me__handle">@jamescodesthings</span></span>
-            </a>
-          </li>
-        </ul>
+<p>This volume is a reference shelf-quiet, exact, and prepared for field use.</p></div>
+        </details>
+        <nav aria-label="Filter index">
+          <ol class="filter-index">
+            
+            <li><a href="#golden-92"><span class="filter-index__num">01</span><span>Golden &#39;92</span></a></li>
+            
+            <li><a href="#eternal-hour"><span class="filter-index__num">02</span><span>Eternal Hour</span></a></li>
+            
+            <li><a href="#street-cool"><span class="filter-index__num">03</span><span>Street Cool</span></a></li>
+            
+            <li><a href="#deep-separation"><span class="filter-index__num">04</span><span>Deep Separation</span></a></li>
+            
+            <li><a href="#vivid-landscape"><span class="filter-index__num">05</span><span>Vivid Landscape</span></a></li>
+            
+            <li><a href="#crimson-dusk"><span class="filter-index__num">06</span><span>Crimson Dusk</span></a></li>
+            
+            <li><a href="#neutral-transparency"><span class="filter-index__num">07</span><span>Neutral Transparency</span></a></li>
+            
+            <li><a href="#complexion-priority"><span class="filter-index__num">08</span><span>Complexion Priority</span></a></li>
+            
+            <li><a href="#pastel-shoulder"><span class="filter-index__num">09</span><span>Pastel Shoulder</span></a></li>
+            
+            <li><a href="#ceremonial-wash"><span class="filter-index__num">10</span><span>Ceremonial Wash</span></a></li>
+            
+            <li><a href="#drugstore-green"><span class="filter-index__num">11</span><span>Drugstore Green</span></a></li>
+            
+            <li><a href="#instant-bloom"><span class="filter-index__num">12</span><span>Instant Bloom</span></a></li>
+            
+            <li><a href="#pastel-memory"><span class="filter-index__num">13</span><span>Pastel Memory</span></a></li>
+            
+            <li><a href="#classic-dispo"><span class="filter-index__num">14</span><span>Classic Dispo</span></a></li>
+            
+            <li><a href="#crimson-register"><span class="filter-index__num">15</span><span>Crimson Register</span></a></li>
+            
+            <li><a href="#cool-lab-slip"><span class="filter-index__num">16</span><span>Cool Lab Slip</span></a></li>
+            
+            <li><a href="#riviera-cyanotype"><span class="filter-index__num">17</span><span>Riviera Cyanotype</span></a></li>
+            
+            <li><a href="#chromatic-storybook"><span class="filter-index__num">18</span><span>Chromatic Storybook</span></a></li>
+            
+            <li><a href="#isle-of-ochre"><span class="filter-index__num">19</span><span>Isle of Ochre</span></a></li>
+            
+            <li><a href="#moody-bw"><span class="filter-index__num">20</span><span>Moody B&amp;W</span></a></li>
+            
+            <li><a href="#textured-bw"><span class="filter-index__num">21</span><span>Textured B&amp;W</span></a></li>
+            
+            <li><a href="#charcoal-depth"><span class="filter-index__num">22</span><span>Charcoal Depth</span></a></li>
+            
+            <li><a href="#neutral"><span class="filter-index__num">23</span><span>Neutral</span></a></li>
+            
+          </ol>
+        </nav>
+
+        
+        <section class="filter" id="golden-92" aria-labelledby="golden-92-title">
+          <h3 id="golden-92-title" class="filter__title"><span class="filter__num">01</span> Golden &#39;92</h3>
+          
+          <div class="strip" role="region" tabindex="0" aria-label="Golden &#39;92 sample shots, scrolls sideways">
+            <picture><source type="image/webp" srcset="static/images/lab-archive-vol-1-cspro/preview/01-golden-92-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/01-golden-92-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" /><img class="strip__img" src="static/images/lab-archive-vol-1-cspro/preview/01-golden-92-2400.webp" srcset="static/images/lab-archive-vol-1-cspro/preview/01-golden-92-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/01-golden-92-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" width="2400" height="419" alt="Golden '92: sample photos through the filter" loading="lazy" decoding="async" /></picture>
+          </div>
+          
+          <div class="filter__body">
+            <div class="prose filter__desc"><p>An archival interpretation of Lomochrome Color '92, the late century experiment in altered spectral response.</p>
+<p>The emulsion's warm-channel priority produced golden midtones and subdued blues, a palette that defined low cost minilab prints through the early 90s.</p>
+<p>In this translation, contrast is moderated and the white point allowed to breathe, yielding soft amber density without loss of structure.</p>
+<p><em>Why it matters:</em> this look recreates the approachable warmth of consumer color in its final analog decade sentimental, inexpensive, and chemically earnest. The gold cast arrives not from grading but from the dye hierarchy itself, where yellow overtook cyan in both time and chemistry.</p>
+<p><em>When to use:</em> open daylight, late summer travel, interior tungsten. It excels where memory, not measurement, is the brief.</p>
+<p><em>Finishing:</em> fine grain simulation restores the tactile softness of 200 speed negative; gentle halation completes the nostalgic bloom.</p></div>
+            
+            <aside class="source" aria-label="Inspired by Lomochrome Color &#39;92">
+              <picture><source type="image/webp" srcset="static/images/source-images/lomo-color-92-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" /><img class="source__img" src="static/images/source-images/lomo-color-92-640.webp" srcset="static/images/source-images/lomo-color-92-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" width="640" height="366" alt="Lomochrome Color '92" loading="lazy" decoding="async" /></picture>
+              <div>
+                <p class="source__title">Inspired by Lomochrome Color &#39;92</p>
+                <div class="prose source__desc"><p>Lomochrome Color '92 is a contemporary emulsion formulated as a homage to late century consumer color film, designed by Lomography to revive the tonal eccentricities of 90s chemistry.</p>
+<p>Released in small runs and processed through standard C-41 chemistry.</p>
+<p>The film's grain structure is relatively fine for its class but intentionally inconsistent, yielding subtle variation frame to frame, an aesthetic echo of supermarket minilabs and home processing kits.</p></div>
+              </div>
+            </aside>
+            
+          </div>
+          <div class="download">
+            <label class="download__label" for="slot-golden-92">Camera slot</label>
+            <select id="slot-golden-92" class="download__select" data-slot-select>
+              <option value="std" selected>Standard (std.flt)</option>
+              <option value="vtg1">Vintage 1 (vtg1.flt)</option>
+              <option value="vtg2">Vintage 2 (vtg2.flt)</option>
+              <option value="bw">B&amp;W (bw.flt)</option>
+              
+            </select>
+            <a class="btn btn--primary download__btn" href="filters/lab-archive-vol-1-cspro/golden-92.flt" download="std.flt" data-filter="golden-92" data-name="Golden &#39;92"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg>
+<span data-download-label>Download as std.flt</span></a>
+          </div>
+        </section>
+        
+        <section class="filter" id="eternal-hour" aria-labelledby="eternal-hour-title">
+          <h3 id="eternal-hour-title" class="filter__title"><span class="filter__num">02</span> Eternal Hour</h3>
+          
+          <div class="strip" role="region" tabindex="0" aria-label="Eternal Hour sample shots, scrolls sideways">
+            <picture><source type="image/webp" srcset="static/images/lab-archive-vol-1-cspro/preview/02-eternal-hour-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/02-eternal-hour-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" /><img class="strip__img" src="static/images/lab-archive-vol-1-cspro/preview/02-eternal-hour-2400.webp" srcset="static/images/lab-archive-vol-1-cspro/preview/02-eternal-hour-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/02-eternal-hour-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" width="2400" height="419" alt="Eternal Hour: sample photos through the filter" loading="lazy" decoding="async" /></picture>
+          </div>
+          
+          <div class="filter__body">
+            <div class="prose filter__desc"><p>A measured warm bias designed to simulate the familiar envelope of late day sun without theatrical overreach.</p>
+<p>Midtones acquire a gentle amber lift, shadows retain structure so that form remains legible, and highlights roll to a soft shoulder rather than flaring.</p>
+<p>The cumulative impression is everyday scenes rendered as memory rather than as a light meter report.</p>
+<p>Unlike aggressive warmth treatments, this variant protects sky discipline and avoids orange skin.</p>
+<p><em>Why it matters:</em> everyday pictures deserve coherence. This look serves as a dependable baseline for family work, travel notes, or portraits where warmth should be felt, not announced. It reproduces the calm density many prints carried when they were well exposed and gently processed at the lab, granting a sense of continuity across frames and sessions.</p>
+<p><em>When to use:</em> daylight, open shade, and interiors with window light. It tolerates a stop of overexposure for an airier rendering without breaking apart.</p>
+<p>Keep compositions simple; let amber mids carry the mood while edges remain crisp.</p>
+<p><em>Finishing:</em> add a small grain layer if desired, and a very light halation on speculars. A subtle vignette can focus the field on faces, but avoid heavy cornering The strength of this profile is its natural, evenly lit read.</p></div>
+            
+            <aside class="source" aria-label="Inspired by Kodak Gold 200">
+              <picture><source type="image/webp" srcset="static/images/source-images/kodak-gold-200-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" /><img class="source__img" src="static/images/source-images/kodak-gold-200-640.webp" srcset="static/images/source-images/kodak-gold-200-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" width="640" height="366" alt="Kodak Gold 200" loading="lazy" decoding="async" /></picture>
+              <div>
+                <p class="source__title">Inspired by Kodak Gold 200</p>
+                <div class="prose source__desc"><p>Mass market consumer color negative introduced in 86 and produced for decades.</p>
+<p>Defined a household aesthetic: amber warmth, approachable contrast, and generous tolerance for everyday use.</p>
+<p>Used primarily for family albums, school events, and travel anywhere a compact camera lived.</p>
+<p>Gold's signature is friendly skin, yellow green inclination in mixed light, and an overall softness that reads as memory rather than measurement.</p></div>
+              </div>
+            </aside>
+            
+          </div>
+          <div class="download">
+            <label class="download__label" for="slot-eternal-hour">Camera slot</label>
+            <select id="slot-eternal-hour" class="download__select" data-slot-select>
+              <option value="std" selected>Standard (std.flt)</option>
+              <option value="vtg1">Vintage 1 (vtg1.flt)</option>
+              <option value="vtg2">Vintage 2 (vtg2.flt)</option>
+              <option value="bw">B&amp;W (bw.flt)</option>
+              
+            </select>
+            <a class="btn btn--primary download__btn" href="filters/lab-archive-vol-1-cspro/eternal-hour.flt" download="std.flt" data-filter="eternal-hour" data-name="Eternal Hour"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg>
+<span data-download-label>Download as std.flt</span></a>
+          </div>
+        </section>
+        
+        <section class="filter" id="street-cool" aria-labelledby="street-cool-title">
+          <h3 id="street-cool-title" class="filter__title"><span class="filter__num">03</span> Street Cool</h3>
+          
+          <div class="strip" role="region" tabindex="0" aria-label="Street Cool sample shots, scrolls sideways">
+            <picture><source type="image/webp" srcset="static/images/lab-archive-vol-1-cspro/preview/03-street-cool-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/03-street-cool-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" /><img class="strip__img" src="static/images/lab-archive-vol-1-cspro/preview/03-street-cool-2400.webp" srcset="static/images/lab-archive-vol-1-cspro/preview/03-street-cool-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/03-street-cool-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" width="2400" height="481" alt="Street Cool: sample photos through the filter" loading="lazy" decoding="async" /></picture>
+          </div>
+          
+          <div class="filter__body">
+            <div class="prose filter__desc"><p>A city first palette that brings order to steel, concrete, and glass.</p>
+<p>Shadows lean cool to preserve separation in dense structure while mids remain clean so skin and signage remain intelligible. Reds are tamed to avoid advertising glare, cyans and magentas are given quiet presence. The contrast profile is deliberate: enough bite to define edges, restrained enough to keep night detail from collapsing.</p>
+<p><em>Why it matters:</em> urban subjects punish imprecision. This look reads as contemporary without abandoning the film lineage controlled color, breathable mids, and measured blacks. It is an excellent default for reportage where you want factual color with a slight nocturnal poise.</p>
+<p><em>When to use:</em> city canyons, overcast afternoons, transit hubs, and blue hour. It handles mixed light gracefully, especially sodium and LED together, keeping the palette legible.</p>
+<p><em>Finishing:</em> add fine grain if you want a newsprint edge. Subtle clarity or micro contrast can emphasize architectural lines, avoid heavy sharpening on faces.</p></div>
+            
+            <aside class="source" aria-label="Inspired by Fuji Superia X-TRA 400">
+              <picture><source type="image/webp" srcset="static/images/source-images/fuji-superia-xtra-400-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" /><img class="source__img" src="static/images/source-images/fuji-superia-xtra-400-640.webp" srcset="static/images/source-images/fuji-superia-xtra-400-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" width="640" height="366" alt="Fuji Superia X-TRA 400" loading="lazy" decoding="async" /></picture>
+              <div>
+                <p class="source__title">Inspired by Fuji Superia X-TRA 400</p>
+                <div class="prose source__desc"><p>High volume consumer color negative introduced in the 90s, widely distributed worldwide.</p>
+<p>Built for robustness, reliable speed, active grain management, and strong dye stability for casual use.</p>
+<p>Signature traits include decisive reds, disciplined greens, and a slightly cool shadow bias. Common subjects: travel, street, family prints.</p>
+<p>Superia X-TRA 400 established the modern snapshot palette; assertive but readable, with enough contrast to hold form in daylight and neon alike.</p></div>
+              </div>
+            </aside>
+            
+          </div>
+          <div class="download">
+            <label class="download__label" for="slot-street-cool">Camera slot</label>
+            <select id="slot-street-cool" class="download__select" data-slot-select>
+              <option value="std" selected>Standard (std.flt)</option>
+              <option value="vtg1">Vintage 1 (vtg1.flt)</option>
+              <option value="vtg2">Vintage 2 (vtg2.flt)</option>
+              <option value="bw">B&amp;W (bw.flt)</option>
+              
+            </select>
+            <a class="btn btn--primary download__btn" href="filters/lab-archive-vol-1-cspro/street-cool.flt" download="std.flt" data-filter="street-cool" data-name="Street Cool"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg>
+<span data-download-label>Download as std.flt</span></a>
+          </div>
+        </section>
+        
+        <section class="filter" id="deep-separation" aria-labelledby="deep-separation-title">
+          <h3 id="deep-separation-title" class="filter__title"><span class="filter__num">04</span> Deep Separation</h3>
+          
+          <div class="strip" role="region" tabindex="0" aria-label="Deep Separation sample shots, scrolls sideways">
+            <picture><source type="image/webp" srcset="static/images/lab-archive-vol-1-cspro/preview/04-deep-separation-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/04-deep-separation-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" /><img class="strip__img" src="static/images/lab-archive-vol-1-cspro/preview/04-deep-separation-2400.webp" srcset="static/images/lab-archive-vol-1-cspro/preview/04-deep-separation-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/04-deep-separation-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" width="2400" height="490" alt="Deep Separation: sample photos through the filter" loading="lazy" decoding="async" /></picture>
+          </div>
+          
+          <div class="filter__body">
+            <div class="prose filter__desc"><p>A separation study for portraits where subject precedence is non-negotiable.</p>
+<p>Background hues, particularly greens and reds, are driven into denser registers while faces keep a quiet luminance, producing a theatrical depth without cartoon saturation. Contrast is assertive but centered in the lower mids so that skin retains volume.</p>
+<p>The effect resembles careful gel work or layered printing: the world deepens, the person holds.</p>
+<p><em>Why it matters:</em> not every portrait needs mercy. Some require intent and gravity. This profile creates space around the subject without resorting to blur or heavy vignetting, giving you editorial presence straight out of camera.</p>
+<p><em>When to use:</em> staged portraits, backlit environments, foliage backgrounds, rim-lit dusk. It is unsuited to delicate pastel scenes; deploy when you want command, not whisper.</p>
+<p><em>Finishing:</em> minimal. If required, a restrained bloom on highlights can polish the theatrical cue. Keep grain fine so the separation remains the story.</p></div>
+            
+            <aside class="source" aria-label="Inspired by Fuji Pro 400H">
+              <picture><source type="image/webp" srcset="static/images/source-images/fuji-pro-400h-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" /><img class="source__img" src="static/images/source-images/fuji-pro-400h-640.webp" srcset="static/images/source-images/fuji-pro-400h-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" width="640" height="360" alt="Fuji Pro 400H" loading="lazy" decoding="async" /></picture>
+              <div>
+                <p class="source__title">Inspired by Fuji Pro 400H</p>
+                <div class="prose source__desc"><p>Professional C-41 color negative, introduced as part of Fujifilm's portrait line and discontinued in 2021.</p>
+<p>Known for pastel restraint, finely managed grain for ISO 400, and a clean cyan green bias that kept skies calm and foliage orderly.</p>
+<p>Adopted by wedding and portrait studios for reliable skin tone reproduction, open shadows, and generous latitude in mixed daylight. When printed conservatively, the look reads neutral with a breathable midtone; when overexposed by a stop, it assumes the airy, high key character associated with editorial portraiture in the 00s.</p></div>
+              </div>
+            </aside>
+            
+          </div>
+          <div class="download">
+            <label class="download__label" for="slot-deep-separation">Camera slot</label>
+            <select id="slot-deep-separation" class="download__select" data-slot-select>
+              <option value="std" selected>Standard (std.flt)</option>
+              <option value="vtg1">Vintage 1 (vtg1.flt)</option>
+              <option value="vtg2">Vintage 2 (vtg2.flt)</option>
+              <option value="bw">B&amp;W (bw.flt)</option>
+              
+            </select>
+            <a class="btn btn--primary download__btn" href="filters/lab-archive-vol-1-cspro/deep-separation.flt" download="std.flt" data-filter="deep-separation" data-name="Deep Separation"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg>
+<span data-download-label>Download as std.flt</span></a>
+          </div>
+        </section>
+        
+        <section class="filter" id="vivid-landscape" aria-labelledby="vivid-landscape-title">
+          <h3 id="vivid-landscape-title" class="filter__title"><span class="filter__num">05</span> Vivid Landscape</h3>
+          
+          <div class="strip" role="region" tabindex="0" aria-label="Vivid Landscape sample shots, scrolls sideways">
+            <picture><source type="image/webp" srcset="static/images/lab-archive-vol-1-cspro/preview/05-vivid-landscape-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/05-vivid-landscape-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" /><img class="strip__img" src="static/images/lab-archive-vol-1-cspro/preview/05-vivid-landscape-2400.webp" srcset="static/images/lab-archive-vol-1-cspro/preview/05-vivid-landscape-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/05-vivid-landscape-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" width="2400" height="375" alt="Vivid Landscape: sample photos through the filter" loading="lazy" decoding="async" /></picture>
+          </div>
+          
+          <div class="filter__body">
+            <div class="prose filter__desc"><p>A saturated, high structure palette for terrain and weather.</p>
+<p>Greens and blues step forward, reds retain a dignified weight in rock and foliage. The contrast curve is firm with a disciplined midtone to maintain separation across distance. Skies carry color and depth without bleeding into the horizon, water holds detail in ripples and shadowed coves.</p>
+<p><em>Why it matters:</em> landscapes often demand assertive color to match memory and effort. This treatment celebrates saturation without dissolving into posterization, staying printable across papers and sizes.</p>
+<p><em>When to use:</em> open daylight, post storm clarity, alpine shade, coastlines at midday. It is less forgiving for portraits; reserve it for places where geology and weather are the subject.</p>
+<p><em>Finishing:</em> subtle clarity and a touch of grain can introduce scale. Keep halation minimal unless you want intentional glow at the sun edge.</p></div>
+            
+            <aside class="source" aria-label="Inspired by Kodak Ektar 100">
+              <picture><source type="image/webp" srcset="static/images/source-images/ektar-100-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" /><img class="source__img" src="static/images/source-images/ektar-100-640.webp" srcset="static/images/source-images/ektar-100-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" width="640" height="428" alt="Kodak Ektar 100" loading="lazy" decoding="async" /></picture>
+              <div>
+                <p class="source__title">Inspired by Kodak Ektar 100</p>
+                <div class="prose source__desc"><p>Professional C-41 negative launched in 08, positioned as ultra-fine grain with bold color.</p>
+<p>A favourite for landscape, product, and travel work where saturation and edge clarity are desirable. Reds assert, blues hold depth, and greens remain vivid without collapsing into a single register.</p>
+<p>Less forgiving for skin under mixed light, but exceptionally capable in controlled conditions and open daylight.</p></div>
+              </div>
+            </aside>
+            
+          </div>
+          <div class="download">
+            <label class="download__label" for="slot-vivid-landscape">Camera slot</label>
+            <select id="slot-vivid-landscape" class="download__select" data-slot-select>
+              <option value="std" selected>Standard (std.flt)</option>
+              <option value="vtg1">Vintage 1 (vtg1.flt)</option>
+              <option value="vtg2">Vintage 2 (vtg2.flt)</option>
+              <option value="bw">B&amp;W (bw.flt)</option>
+              
+            </select>
+            <a class="btn btn--primary download__btn" href="filters/lab-archive-vol-1-cspro/vivid-landscape.flt" download="std.flt" data-filter="vivid-landscape" data-name="Vivid Landscape"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg>
+<span data-download-label>Download as std.flt</span></a>
+          </div>
+        </section>
+        
+        <section class="filter" id="crimson-dusk" aria-labelledby="crimson-dusk-title">
+          <h3 id="crimson-dusk-title" class="filter__title"><span class="filter__num">06</span> Crimson Dusk</h3>
+          
+          <div class="strip" role="region" tabindex="0" aria-label="Crimson Dusk sample shots, scrolls sideways">
+            <picture><source type="image/webp" srcset="static/images/lab-archive-vol-1-cspro/preview/06-crimson-dusk-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/06-crimson-dusk-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" /><img class="strip__img" src="static/images/lab-archive-vol-1-cspro/preview/06-crimson-dusk-2400.webp" srcset="static/images/lab-archive-vol-1-cspro/preview/06-crimson-dusk-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/06-crimson-dusk-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" width="2400" height="412" alt="Crimson Dusk: sample photos through the filter" loading="lazy" decoding="async" /></picture>
+          </div>
+          
+          <div class="filter__body">
+            <div class="prose filter__desc"><p>A controlled red emphasis that deepens through the spectrum toward crimson while protecting orange from flattening.</p>
+<p>Shadows adopt a faint cyan countercast that prevents the frame from choking, keeping night and late day scenes legible. The mood is deliberate; autumn canopies, neon reflections, and sun rims take on a theatrical density without turning lurid.</p>
+<p><em>Why it matters:</em> red is notoriously hard to manage. This profile offers a usable, printable red that carries emotion and edge. It is a specialty tool for when scarlet detail is the story.</p>
+<p><em>When to use:</em> blue hour, city signage, late sun through leaves, interiors with tungsten accents. Avoid close portraits unless a red bias is intended.</p>
+<p><em>Finishing:</em> mild bloom on highlights completes the cinematic read, hold back on global saturation to keep the discipline intact.</p></div>
+            
+            <aside class="source" aria-label="Inspired by Fuji Velvia 100">
+              <picture><source type="image/webp" srcset="static/images/source-images/fuji-velvia-100-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" /><img class="source__img" src="static/images/source-images/fuji-velvia-100-640.webp" srcset="static/images/source-images/fuji-velvia-100-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" width="640" height="366" alt="Fuji Velvia 100" loading="lazy" decoding="async" /></picture>
+              <div>
+                <p class="source__title">Inspired by Fuji Velvia 100</p>
+                <div class="prose source__desc"><p>E-6 transparency stock introduced in the mid 00s as a modern counterpart to the original Velvia.</p>
+<p>Revered for saturation and micro contrast with unusually fine grain for slide. Landscape specialists leaned on Velvia for deep skies, assertive greens, and the peculiar way reds deepen without losing edge. Reciprocity behaviour and dye stability improved over earlier variants, allowing long exposures and archival prints with fewer compromises.</p>
+<p>Used with care, it is dramatic without chaos; used casually, it dominates the scene.</p></div>
+              </div>
+            </aside>
+            
+          </div>
+          <div class="download">
+            <label class="download__label" for="slot-crimson-dusk">Camera slot</label>
+            <select id="slot-crimson-dusk" class="download__select" data-slot-select>
+              <option value="std" selected>Standard (std.flt)</option>
+              <option value="vtg1">Vintage 1 (vtg1.flt)</option>
+              <option value="vtg2">Vintage 2 (vtg2.flt)</option>
+              <option value="bw">B&amp;W (bw.flt)</option>
+              
+            </select>
+            <a class="btn btn--primary download__btn" href="filters/lab-archive-vol-1-cspro/crimson-dusk.flt" download="std.flt" data-filter="crimson-dusk" data-name="Crimson Dusk"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg>
+<span data-download-label>Download as std.flt</span></a>
+          </div>
+        </section>
+        
+        <section class="filter" id="neutral-transparency" aria-labelledby="neutral-transparency-title">
+          <h3 id="neutral-transparency-title" class="filter__title"><span class="filter__num">07</span> Neutral Transparency</h3>
+          
+          <div class="strip" role="region" tabindex="0" aria-label="Neutral Transparency sample shots, scrolls sideways">
+            <picture><source type="image/webp" srcset="static/images/lab-archive-vol-1-cspro/preview/07-neutral-transparency-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/07-neutral-transparency-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" /><img class="strip__img" src="static/images/lab-archive-vol-1-cspro/preview/07-neutral-transparency-2400.webp" srcset="static/images/lab-archive-vol-1-cspro/preview/07-neutral-transparency-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/07-neutral-transparency-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" width="2400" height="492" alt="Neutral Transparency: sample photos through the filter" loading="lazy" decoding="async" /></picture>
+          </div>
+          
+          <div class="filter__body">
+            <div class="prose filter__desc"><p>A slide like neutrality with a measured cyan green inclination.</p>
+<p>The aim is clarity: skies that do not blare, foliage that keeps its structure, and neutrals that print cleanly without corrective gymnastics. Micro contrast is modest to preserve edge fidelity, color is present but not performative.</p>
+<p>It is the look you want when accuracy is the brief and consistency is the schedule.</p>
+<p><em>Why it matters:</em> editorial and catalog work value repeatable behaviour. This rendition offers disciplined color and responsible contrast, making sequences cut together without visible drift.</p>
+<p><em>When to use:</em> controlled daylight, product and travel documentation, any situation where you intend to grade selectively afterward. Because the base is honest, small directional edits land precisely.</p>
+<p><em>Finishing:</em> fine grain can simulate light-table provenance. Consider subtle clarity for edge definition; avoid saturation spikes that break the slide illusion.</p></div>
+            
+            <aside class="source" aria-label="Inspired by Fuji Provia 100F">
+              <picture><source type="image/webp" srcset="static/images/source-images/fuji-provia-100f-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" /><img class="source__img" src="static/images/source-images/fuji-provia-100f-640.webp" srcset="static/images/source-images/fuji-provia-100f-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" width="640" height="360" alt="Fuji Provia 100F" loading="lazy" decoding="async" /></picture>
+              <div>
+                <p class="source__title">Inspired by Fuji Provia 100F</p>
+                <div class="prose source__desc"><p>Professional E-6 transparency film launched as a refinement of the Provia line.</p>
+<p>Defined by fine grain, high acutance, and an honest palette with a measured coolness: skies remain disciplined, foliage separates cleanly, and neutrals retain structure.</p>
+<p>Used by editorial and commercial practitioners requiring dependable color under controlled light.</p>
+<p>Its slide character is less theatrical than Velvia, more surgical than consumer color negative, and ideal where precision and repeatability outrank spectacle.</p></div>
+              </div>
+            </aside>
+            
+          </div>
+          <div class="download">
+            <label class="download__label" for="slot-neutral-transparency">Camera slot</label>
+            <select id="slot-neutral-transparency" class="download__select" data-slot-select>
+              <option value="std" selected>Standard (std.flt)</option>
+              <option value="vtg1">Vintage 1 (vtg1.flt)</option>
+              <option value="vtg2">Vintage 2 (vtg2.flt)</option>
+              <option value="bw">B&amp;W (bw.flt)</option>
+              
+            </select>
+            <a class="btn btn--primary download__btn" href="filters/lab-archive-vol-1-cspro/neutral-transparency.flt" download="std.flt" data-filter="neutral-transparency" data-name="Neutral Transparency"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg>
+<span data-download-label>Download as std.flt</span></a>
+          </div>
+        </section>
+        
+        <section class="filter" id="complexion-priority" aria-labelledby="complexion-priority-title">
+          <h3 id="complexion-priority-title" class="filter__title"><span class="filter__num">08</span> Complexion Priority</h3>
+          
+          <div class="strip" role="region" tabindex="0" aria-label="Complexion Priority sample shots, scrolls sideways">
+            <picture><source type="image/webp" srcset="static/images/lab-archive-vol-1-cspro/preview/08-complexion-priority-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/08-complexion-priority-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" /><img class="strip__img" src="static/images/lab-archive-vol-1-cspro/preview/08-complexion-priority-2400.webp" srcset="static/images/lab-archive-vol-1-cspro/preview/08-complexion-priority-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/08-complexion-priority-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" width="2400" height="412" alt="Complexion Priority: sample photos through the filter" loading="lazy" decoding="async" /></picture>
+          </div>
+          
+          <div class="filter__body">
+            <div class="prose filter__desc"><p>A portrait first profile that lends energy to faces without turning them orange or plastic.</p>
+<p>Midtones warm just enough to quicken complexion, while surrounding greens and blues remain orderly so that parks, coastlines, and street scenes do not contaminate skin. Contrast is held in check to keep pores and texture humane; highlights roll smoothly to protect specular points on cheeks and eyes.</p>
+<p><em>Why it matters:</em> people live in mixed environments, and portraits cannot rely on perfect backdrops. This look tilts the equation toward the subject with restraint, creating flattering frames that still feel like the world you were in.</p>
+<p><em>When to use:</em> travel candids, editorial lifestyle, portraits against foliage or water. Meter for the face; allow the background to sit half a stop down for natural separation.</p>
+<p><em>Finishing:</em> a small bloom can add magazine polish. Keep sharpening light-edge acuity is already adequate out of the profile.</p></div>
+            
+            <aside class="source" aria-label="Inspired by Fuji Provia 100F">
+              <picture><source type="image/webp" srcset="static/images/source-images/fuji-provia-100f-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" /><img class="source__img" src="static/images/source-images/fuji-provia-100f-640.webp" srcset="static/images/source-images/fuji-provia-100f-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" width="640" height="360" alt="Fuji Provia 100F" loading="lazy" decoding="async" /></picture>
+              <div>
+                <p class="source__title">Inspired by Fuji Provia 100F</p>
+                <div class="prose source__desc"><p>Professional E-6 transparency film launched as a refinement of the Provia line.</p>
+<p>Defined by fine grain, high acutance, and an honest palette with a measured coolness: skies remain disciplined, foliage separates cleanly, and neutrals retain structure.</p>
+<p>Used by editorial and commercial practitioners requiring dependable color under controlled light.</p>
+<p>Its slide character is less theatrical than Velvia, more surgical than consumer color negative, and ideal where precision and repeatability outrank spectacle.</p></div>
+              </div>
+            </aside>
+            
+          </div>
+          <div class="download">
+            <label class="download__label" for="slot-complexion-priority">Camera slot</label>
+            <select id="slot-complexion-priority" class="download__select" data-slot-select>
+              <option value="std" selected>Standard (std.flt)</option>
+              <option value="vtg1">Vintage 1 (vtg1.flt)</option>
+              <option value="vtg2">Vintage 2 (vtg2.flt)</option>
+              <option value="bw">B&amp;W (bw.flt)</option>
+              
+            </select>
+            <a class="btn btn--primary download__btn" href="filters/lab-archive-vol-1-cspro/complexion-priority.flt" download="std.flt" data-filter="complexion-priority" data-name="Complexion Priority"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg>
+<span data-download-label>Download as std.flt</span></a>
+          </div>
+        </section>
+        
+        <section class="filter" id="pastel-shoulder" aria-labelledby="pastel-shoulder-title">
+          <h3 id="pastel-shoulder-title" class="filter__title"><span class="filter__num">09</span> Pastel Shoulder</h3>
+          
+          <div class="strip" role="region" tabindex="0" aria-label="Pastel Shoulder sample shots, scrolls sideways">
+            <picture><source type="image/webp" srcset="static/images/lab-archive-vol-1-cspro/preview/09-pastel-shoulder-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/09-pastel-shoulder-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" /><img class="strip__img" src="static/images/lab-archive-vol-1-cspro/preview/09-pastel-shoulder-2400.webp" srcset="static/images/lab-archive-vol-1-cspro/preview/09-pastel-shoulder-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/09-pastel-shoulder-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" width="2400" height="298" alt="Pastel Shoulder: sample photos through the filter" loading="lazy" decoding="async" /></picture>
+          </div>
+          
+          <div class="filter__body">
+            <div class="prose filter__desc"><p>Derived from Portra 400's over exposure curve.
+This filter reproduces the film's graceful highlight shoulder and reduced chroma under strong light.</p>
+<p>Saturation folds inward, micro contrast softens, and skin acquires a diffused warmth that reads as light rather than pigment.</p>
+<p><em>Why it matters:</em> the Portra lineage solved a perennial printing problem; how to keep texture inside white fabric and pale skin without clipping. This interpretation honours that discipline while offering a luminous, pastel register suitable for modern sensors.</p>
+<p><em>When to use:</em> high key portraiture, sunlit interiors, ceremonies, and open shade. Overexpose by roughly one stop for the full airy roll off.</p>
+<p><em>Finishing:</em> pair with mild halation or diffusion to echo optical bloom; avoid heavy clarity which breaks the filmic continuity.</p></div>
+            
+            <aside class="source" aria-label="Inspired by Kodak Portra 400">
+              <picture><source type="image/webp" srcset="static/images/source-images/portra-400-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" /><img class="source__img" src="static/images/source-images/portra-400-640.webp" srcset="static/images/source-images/portra-400-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" width="640" height="366" alt="Kodak Portra 400" loading="lazy" decoding="async" /></picture>
+              <div>
+                <p class="source__title">Inspired by Kodak Portra 400</p>
+                <div class="prose source__desc"><p>Professional C-41 negative introduced in the late 90s as part of the Portra suite.</p>
+<p>Engineered for skin tone fidelity, broad latitude, and dependable grain for its speed. Adopted as a default by portrait and wedding studios, and later by editorial shooters seeking a warm but controlled palette.</p>
+<p>Portra 400 tolerates overexposure gracefully, yielding the well-known airy, forgiving look while preserving midtone structure.</p></div>
+              </div>
+            </aside>
+            
+          </div>
+          <div class="download">
+            <label class="download__label" for="slot-pastel-shoulder">Camera slot</label>
+            <select id="slot-pastel-shoulder" class="download__select" data-slot-select>
+              <option value="std" selected>Standard (std.flt)</option>
+              <option value="vtg1">Vintage 1 (vtg1.flt)</option>
+              <option value="vtg2">Vintage 2 (vtg2.flt)</option>
+              <option value="bw">B&amp;W (bw.flt)</option>
+              
+            </select>
+            <a class="btn btn--primary download__btn" href="filters/lab-archive-vol-1-cspro/pastel-shoulder.flt" download="std.flt" data-filter="pastel-shoulder" data-name="Pastel Shoulder"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg>
+<span data-download-label>Download as std.flt</span></a>
+          </div>
+        </section>
+        
+        <section class="filter" id="ceremonial-wash" aria-labelledby="ceremonial-wash-title">
+          <h3 id="ceremonial-wash-title" class="filter__title"><span class="filter__num">10</span> Ceremonial Wash</h3>
+          
+          <div class="strip" role="region" tabindex="0" aria-label="Ceremonial Wash sample shots, scrolls sideways">
+            <picture><source type="image/webp" srcset="static/images/lab-archive-vol-1-cspro/preview/10-ceremonial-wash-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/10-ceremonial-wash-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" /><img class="strip__img" src="static/images/lab-archive-vol-1-cspro/preview/10-ceremonial-wash-2400.webp" srcset="static/images/lab-archive-vol-1-cspro/preview/10-ceremonial-wash-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/10-ceremonial-wash-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" width="2400" height="411" alt="Ceremonial Wash: sample photos through the filter" loading="lazy" decoding="async" /></picture>
+          </div>
+          
+          <div class="filter__body">
+            <div class="prose filter__desc"><p>An airy rendition built for garments and skin under bright ceremony light.</p>
+<p>Contrast is lowered to open the fabric's weave and protect the highlight shoulder, while saturation is reduced so bouquets and decor do not overwhelm complexions. The whites here glow rather than clip, shadows lighten without turning to fog.</p>
+<p>It is a quiet correction for a notoriously challenging environment: veils, reflective surfaces, and variable daylight all in the same frame.</p>
+<p><em>Why it matters:</em> skin and textile detail must survive the day. This treatment keeps tonal information available for printing while maintaining the luminous character clients expect. It avoids trendy color casts and focuses on clarity and grace.</p>
+<p><em>When to use:</em> ceremonies, editorials with white garments, high key interiors. The profile tolerates modest overexposure and rewards careful metering on faces.</p>
+<p><em>Finishing:</em> gentle halation reads beautifully on specular edges; a touch of diffusion can soften transitions without sacrificing the cut of a suit or dress.</p></div>
+            
+            <aside class="source" aria-label="Inspired by Fuji Pro 400H">
+              <picture><source type="image/webp" srcset="static/images/source-images/fuji-pro-400h-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" /><img class="source__img" src="static/images/source-images/fuji-pro-400h-640.webp" srcset="static/images/source-images/fuji-pro-400h-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" width="640" height="360" alt="Fuji Pro 400H" loading="lazy" decoding="async" /></picture>
+              <div>
+                <p class="source__title">Inspired by Fuji Pro 400H</p>
+                <div class="prose source__desc"><p>Professional C-41 color negative, introduced as part of Fujifilm's portrait line and discontinued in 2021.</p>
+<p>Known for pastel restraint, finely managed grain for ISO 400, and a clean cyan green bias that kept skies calm and foliage orderly.</p>
+<p>Adopted by wedding and portrait studios for reliable skin tone reproduction, open shadows, and generous latitude in mixed daylight. When printed conservatively, the look reads neutral with a breathable midtone; when overexposed by a stop, it assumes the airy, high key character associated with editorial portraiture in the 00s.</p></div>
+              </div>
+            </aside>
+            
+          </div>
+          <div class="download">
+            <label class="download__label" for="slot-ceremonial-wash">Camera slot</label>
+            <select id="slot-ceremonial-wash" class="download__select" data-slot-select>
+              <option value="std" selected>Standard (std.flt)</option>
+              <option value="vtg1">Vintage 1 (vtg1.flt)</option>
+              <option value="vtg2">Vintage 2 (vtg2.flt)</option>
+              <option value="bw">B&amp;W (bw.flt)</option>
+              
+            </select>
+            <a class="btn btn--primary download__btn" href="filters/lab-archive-vol-1-cspro/ceremonial-wash.flt" download="std.flt" data-filter="ceremonial-wash" data-name="Ceremonial Wash"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg>
+<span data-download-label>Download as std.flt</span></a>
+          </div>
+        </section>
+        
+        <section class="filter" id="drugstore-green" aria-labelledby="drugstore-green-title">
+          <h3 id="drugstore-green-title" class="filter__title"><span class="filter__num">11</span> Drugstore Green</h3>
+          
+          <div class="strip" role="region" tabindex="0" aria-label="Drugstore Green sample shots, scrolls sideways">
+            <picture><source type="image/webp" srcset="static/images/lab-archive-vol-1-cspro/preview/11-drugstore-green-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/11-drugstore-green-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" /><img class="strip__img" src="static/images/lab-archive-vol-1-cspro/preview/11-drugstore-green-2400.webp" srcset="static/images/lab-archive-vol-1-cspro/preview/11-drugstore-green-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/11-drugstore-green-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" width="2400" height="481" alt="Drugstore Green: sample photos through the filter" loading="lazy" decoding="async" /></picture>
+          </div>
+          
+          <div class="filter__body">
+            <div class="prose filter__desc"><p>A faithful study of mid 90s consumer minilab output: slightly lowered white point, firm blacks, and a faint green bias inherited from common Fuji leaning calibrations.</p>
+<p>Highlights sit down rather than shouting. Color remains present but tempered, producing the shoebox of prints atmosphere so many family archives share.</p>
+<p>Reds and blues are disciplined, preventing the cartooning that cheap scans sometimes introduced. The effect is not antique, it is simply honest about how the era's chemistry and optics tended to resolve everyday scenes.</p>
+<p><em>Why it matters:</em> documentary work thrives on believable tone. This treatment gives context and time without gimmick, letting expressions and environments do the talking. It suggests machine prints and satin paper without forcing faux aging.</p>
+<p><em>When to use:</em> neighbourhood streets, supermarkets, back gardens, low winter sun. Works well with textures; brick, fabric, foliage. Where the slight suppression of highlights allows detail to hold.</p>
+<p><em>Finishing:</em> grain takes beautifully here. Light leaks or borders can be added for narrative effect, but the profile stands on its own as a credible consumer print reference.</p></div>
+            
+            <aside class="source" aria-label="Inspired by Fuji Superia X-TRA 400">
+              <picture><source type="image/webp" srcset="static/images/source-images/fuji-superia-xtra-400-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" /><img class="source__img" src="static/images/source-images/fuji-superia-xtra-400-640.webp" srcset="static/images/source-images/fuji-superia-xtra-400-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" width="640" height="366" alt="Fuji Superia X-TRA 400" loading="lazy" decoding="async" /></picture>
+              <div>
+                <p class="source__title">Inspired by Fuji Superia X-TRA 400</p>
+                <div class="prose source__desc"><p>High volume consumer color negative introduced in the 90s, widely distributed worldwide.</p>
+<p>Built for robustness, reliable speed, active grain management, and strong dye stability for casual use.</p>
+<p>Signature traits include decisive reds, disciplined greens, and a slightly cool shadow bias. Common subjects: travel, street, family prints.</p>
+<p>Superia X-TRA 400 established the modern snapshot palette; assertive but readable, with enough contrast to hold form in daylight and neon alike.</p></div>
+              </div>
+            </aside>
+            
+          </div>
+          <div class="download">
+            <label class="download__label" for="slot-drugstore-green">Camera slot</label>
+            <select id="slot-drugstore-green" class="download__select" data-slot-select>
+              <option value="std" selected>Standard (std.flt)</option>
+              <option value="vtg1">Vintage 1 (vtg1.flt)</option>
+              <option value="vtg2">Vintage 2 (vtg2.flt)</option>
+              <option value="bw">B&amp;W (bw.flt)</option>
+              
+            </select>
+            <a class="btn btn--primary download__btn" href="filters/lab-archive-vol-1-cspro/drugstore-green.flt" download="std.flt" data-filter="drugstore-green" data-name="Drugstore Green"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg>
+<span data-download-label>Download as std.flt</span></a>
+          </div>
+        </section>
+        
+        <section class="filter" id="instant-bloom" aria-labelledby="instant-bloom-title">
+          <h3 id="instant-bloom-title" class="filter__title"><span class="filter__num">12</span> Instant Bloom</h3>
+          
+          <div class="strip" role="region" tabindex="0" aria-label="Instant Bloom sample shots, scrolls sideways">
+            <picture><source type="image/webp" srcset="static/images/lab-archive-vol-1-cspro/preview/12-instant-bloom-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/12-instant-bloom-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" /><img class="strip__img" src="static/images/lab-archive-vol-1-cspro/preview/12-instant-bloom-2400.webp" srcset="static/images/lab-archive-vol-1-cspro/preview/12-instant-bloom-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/12-instant-bloom-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" width="2400" height="365" alt="Instant Bloom: sample photos through the filter" loading="lazy" decoding="async" /></picture>
+          </div>
+          
+          <div class="filter__body">
+            <div class="prose filter__desc"><p>A chromatic diffusion study drawn from integral Polaroid chemistry.</p>
+<p>The instant print process often allowed magenta dyes to outrun cyan during development, producing the familiar rose tinted glow.</p>
+<p>Here, that imbalance is recreated through warm shifted highlights and a cool cyan counter shadow, establishing the gentle push pull that defined late era instant color.</p>
+<p><em>Why it matters:</em> the Polaroid palette was less an error than a signature; chemical impatience turned aesthetic rule. This filter restores that immediacy without the unpredictability of reagent spread.</p>
+<p><em>When to use:</em> portraits in window light, reflective interiors, and dusk scenes that invite emotional color. Works best on materials that can absorb the pink aura; skin, cloth, fog.</p>
+<p><em>Finishing:</em> a narrow vignette or halation accent enhances the instant print illusion; keep contrast low to preserve diffusion.</p></div>
+            
+            <aside class="source" aria-label="Inspired by Polaroid Instant Film">
+              <picture><source type="image/webp" srcset="static/images/source-images/polaroid-i-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" /><img class="source__img" src="static/images/source-images/polaroid-i-640.webp" srcset="static/images/source-images/polaroid-i-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" width="640" height="366" alt="Polaroid Instant Film" loading="lazy" decoding="async" /></picture>
+              <div>
+                <p class="source__title">Inspired by Polaroid Instant Film</p>
+                <div class="prose source__desc"><p>Integral instant materials spanning SX-70, 600, and modern i-Type families.</p>
+<p>Optical diffusion, developer chemistry, and pod spread govern the look: muted separation, soft focus tendencies, and occasional edge artifacts.</p>
+<p>Used for portraits, ephemera, and proofing where immediacy outranks precision.</p>
+<p>Collectors recognize the palette not as imperfect, but as its own aesthetic language: tender highlights, gentle blacks, and the noble unpredictability of instant development.</p></div>
+              </div>
+            </aside>
+            
+          </div>
+          <div class="download">
+            <label class="download__label" for="slot-instant-bloom">Camera slot</label>
+            <select id="slot-instant-bloom" class="download__select" data-slot-select>
+              <option value="std" selected>Standard (std.flt)</option>
+              <option value="vtg1">Vintage 1 (vtg1.flt)</option>
+              <option value="vtg2">Vintage 2 (vtg2.flt)</option>
+              <option value="bw">B&amp;W (bw.flt)</option>
+              
+            </select>
+            <a class="btn btn--primary download__btn" href="filters/lab-archive-vol-1-cspro/instant-bloom.flt" download="std.flt" data-filter="instant-bloom" data-name="Instant Bloom"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg>
+<span data-download-label>Download as std.flt</span></a>
+          </div>
+        </section>
+        
+        <section class="filter" id="pastel-memory" aria-labelledby="pastel-memory-title">
+          <h3 id="pastel-memory-title" class="filter__title"><span class="filter__num">13</span> Pastel Memory</h3>
+          
+          <div class="strip" role="region" tabindex="0" aria-label="Pastel Memory sample shots, scrolls sideways">
+            <picture><source type="image/webp" srcset="static/images/lab-archive-vol-1-cspro/preview/13-pastel-memory-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/13-pastel-memory-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" /><img class="strip__img" src="static/images/lab-archive-vol-1-cspro/preview/13-pastel-memory-2400.webp" srcset="static/images/lab-archive-vol-1-cspro/preview/13-pastel-memory-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/13-pastel-memory-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" width="2400" height="365" alt="Pastel Memory: sample photos through the filter" loading="lazy" decoding="async" /></picture>
+          </div>
+          
+          <div class="filter__body">
+            <div class="prose filter__desc"><p>An aged print simulation that emulates the slow fading of consumer color dyes.</p>
+<p>Midtones lose intensity, edges soften, and overall warmth settles into the paper stock rather than the scene. Reds relax to coral, blues drift toward gray, and greens desaturate into a calm neutrality.</p>
+<p>The impression is of a photograph remembered, not freshly made.</p>
+<p><em>Why it matters:</em> real archives show how color ages unevenly. This filter respects that entropy and turns it into mood. It creates visual distance without artificial sepia or texture overlays.</p>
+<p><em>When to use:</em> interiors, vernacular streets, travel diaries, or any frame seeking understatement. Especially effective where the subject already suggests time passing.</p>
+<p><em>Finishing:</em> a fine grain layer and gentle vignette simulate aged enlargement; maintain moderate exposure for authenticity.</p></div>
+            
+            <aside class="source" aria-label="Inspired by Polaroid Instant Film">
+              <picture><source type="image/webp" srcset="static/images/source-images/polaroid-i-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" /><img class="source__img" src="static/images/source-images/polaroid-i-640.webp" srcset="static/images/source-images/polaroid-i-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" width="640" height="366" alt="Polaroid Instant Film" loading="lazy" decoding="async" /></picture>
+              <div>
+                <p class="source__title">Inspired by Polaroid Instant Film</p>
+                <div class="prose source__desc"><p>Integral instant materials spanning SX-70, 600, and modern i-Type families.</p>
+<p>Optical diffusion, developer chemistry, and pod spread govern the look: muted separation, soft focus tendencies, and occasional edge artifacts.</p>
+<p>Used for portraits, ephemera, and proofing where immediacy outranks precision.</p>
+<p>Collectors recognize the palette not as imperfect, but as its own aesthetic language: tender highlights, gentle blacks, and the noble unpredictability of instant development.</p></div>
+              </div>
+            </aside>
+            
+          </div>
+          <div class="download">
+            <label class="download__label" for="slot-pastel-memory">Camera slot</label>
+            <select id="slot-pastel-memory" class="download__select" data-slot-select>
+              <option value="std" selected>Standard (std.flt)</option>
+              <option value="vtg1">Vintage 1 (vtg1.flt)</option>
+              <option value="vtg2">Vintage 2 (vtg2.flt)</option>
+              <option value="bw">B&amp;W (bw.flt)</option>
+              
+            </select>
+            <a class="btn btn--primary download__btn" href="filters/lab-archive-vol-1-cspro/pastel-memory.flt" download="std.flt" data-filter="pastel-memory" data-name="Pastel Memory"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg>
+<span data-download-label>Download as std.flt</span></a>
+          </div>
+        </section>
+        
+        <section class="filter" id="classic-dispo" aria-labelledby="classic-dispo-title">
+          <h3 id="classic-dispo-title" class="filter__title"><span class="filter__num">14</span> Classic Dispo</h3>
+          
+          <div class="strip" role="region" tabindex="0" aria-label="Classic Dispo sample shots, scrolls sideways">
+            <picture><source type="image/webp" srcset="static/images/lab-archive-vol-1-cspro/preview/14-classic-dispo-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/14-classic-dispo-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" /><img class="strip__img" src="static/images/lab-archive-vol-1-cspro/preview/14-classic-dispo-2400.webp" srcset="static/images/lab-archive-vol-1-cspro/preview/14-classic-dispo-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/14-classic-dispo-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" width="2400" height="365" alt="Classic Dispo: sample photos through the filter" loading="lazy" decoding="async" /></picture>
+          </div>
+          
+          <div class="filter__body">
+            <div class="prose filter__desc"><p>An honest disposable camera reference: contrast lowered, exposure pulled back, and a yellow green tendency that pushes blues toward surrender.</p>
+<p>Skin keeps little pockets of red that survive across scenes; signage, cheeks, the accidental highlight, creating a lived in palette. The image reads like a collection of nights out and kitchen tables, not a studio exercise.</p>
+<p><em>Why it matters:</em> this is the vernacular of the 90s and 00s, the look of impulse and proximity. It has cultural truth baked in, with enough discipline here to stay printable.</p>
+<p><em>When to use:</em> parties, street portraits, low light with flash or sodium spill. Avoid mission critical work; this is a character filter, not a safety net.</p>
+<p><em>Finishing:</em> a light vignette or halation enhances the lab made wonk without turning the frame into pastiche.</p></div>
+            
+            <aside class="source" aria-label="Inspired by Disposable Cameras">
+              <picture><source type="image/webp" srcset="static/images/source-images/bady-abbas-yXwdLSYSaFc-unsplash-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" /><img class="source__img" src="static/images/source-images/bady-abbas-yXwdLSYSaFc-unsplash-640.webp" srcset="static/images/source-images/bady-abbas-yXwdLSYSaFc-unsplash-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" width="640" height="300" alt="Disposable Cameras" loading="lazy" decoding="async" /></picture>
+              <div>
+                <p class="source__title">Inspired by Disposable Cameras</p>
+                <div class="prose source__desc"><p>Single use cameras peaked from the early 90s to late 00s, pairing fixed focus plastic lenses with mid speed color negative stocks.</p>
+<p>Marketed for parties, weddings, and travel, they democratized casual documentation.</p>
+<p>The appeal is anthropological as much as aesthetic; a record of how inexpensive optics, coarse scanning, and hurried chemistry shaped memory.</p>
+<p>In practice: subjects hold, backgrounds soften, and the frame reads as lived in rather than clinical.</p></div>
+              </div>
+            </aside>
+            
+          </div>
+          <div class="download">
+            <label class="download__label" for="slot-classic-dispo">Camera slot</label>
+            <select id="slot-classic-dispo" class="download__select" data-slot-select>
+              <option value="std" selected>Standard (std.flt)</option>
+              <option value="vtg1">Vintage 1 (vtg1.flt)</option>
+              <option value="vtg2">Vintage 2 (vtg2.flt)</option>
+              <option value="bw">B&amp;W (bw.flt)</option>
+              
+            </select>
+            <a class="btn btn--primary download__btn" href="filters/lab-archive-vol-1-cspro/classic-dispo.flt" download="std.flt" data-filter="classic-dispo" data-name="Classic Dispo"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg>
+<span data-download-label>Download as std.flt</span></a>
+          </div>
+        </section>
+        
+        <section class="filter" id="crimson-register" aria-labelledby="crimson-register-title">
+          <h3 id="crimson-register-title" class="filter__title"><span class="filter__num">15</span> Crimson Register</h3>
+          
+          <div class="strip" role="region" tabindex="0" aria-label="Crimson Register sample shots, scrolls sideways">
+            <picture><source type="image/webp" srcset="static/images/lab-archive-vol-1-cspro/preview/15-crimson-register-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/15-crimson-register-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" /><img class="strip__img" src="static/images/lab-archive-vol-1-cspro/preview/15-crimson-register-2400.webp" srcset="static/images/lab-archive-vol-1-cspro/preview/15-crimson-register-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/15-crimson-register-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" width="2400" height="298" alt="Crimson Register: sample photos through the filter" loading="lazy" decoding="async" /></picture>
+          </div>
+          
+          <div class="filter__body">
+            <div class="prose filter__desc"><p>A warm channel expansion derived from Konica Centuria's handling of reds under daylight.</p>
+<p>The response curve favours mid spectrum crimson while maintaining a cool counter in the shadows, producing a balanced, printable energy.</p>
+<p>Brick, foliage, and signage take on the assertive warmth familiar to late s90s emulsions without collapsing into over saturation.</p>
+<p><em>Why it matters:</em> few stocks managed red with grace. This study isolates that tonal dialogue for reliable reproduction. It restores color intensity to urban material without digital glare.</p>
+<p><em>When to use:</em> street scenes, markets, urban facades, and architecture in hard light. It enlivens static compositions where color carries the narrative.</p>
+<p><em>Finishing:</em> avoid global saturation boosts; instead apply controlled grain or mild bloom to maintain chemical plausibility.</p></div>
+            
+            <aside class="source" aria-label="Inspired by Konica Centuria 100">
+              <picture><source type="image/webp" srcset="static/images/source-images/konica-centuria-100-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" /><img class="source__img" src="static/images/source-images/konica-centuria-100-640.webp" srcset="static/images/source-images/konica-centuria-100-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" width="640" height="366" alt="Konica Centuria 100" loading="lazy" decoding="async" /></picture>
+              <div>
+                <p class="source__title">Inspired by Konica Centuria 100</p>
+                <div class="prose source__desc"><p>Late 90s consumer negative with a recognizable magenta-green dialogue and fine grain for ISO 100.</p>
+<p>Popular in point and shoots and compact SLRs across Asia and Europe.</p>
+<p>Centuria prints often revealed flattering skin with an atmospheric cast, especially under overcast daylight.</p>
+<p>It sits apart from Kodak's warmth and Fuji's cool order: slightly mannered, but charming in the right scene.</p></div>
+              </div>
+            </aside>
+            
+          </div>
+          <div class="download">
+            <label class="download__label" for="slot-crimson-register">Camera slot</label>
+            <select id="slot-crimson-register" class="download__select" data-slot-select>
+              <option value="std" selected>Standard (std.flt)</option>
+              <option value="vtg1">Vintage 1 (vtg1.flt)</option>
+              <option value="vtg2">Vintage 2 (vtg2.flt)</option>
+              <option value="bw">B&amp;W (bw.flt)</option>
+              
+            </select>
+            <a class="btn btn--primary download__btn" href="filters/lab-archive-vol-1-cspro/crimson-register.flt" download="std.flt" data-filter="crimson-register" data-name="Crimson Register"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg>
+<span data-download-label>Download as std.flt</span></a>
+          </div>
+        </section>
+        
+        <section class="filter" id="cool-lab-slip" aria-labelledby="cool-lab-slip-title">
+          <h3 id="cool-lab-slip-title" class="filter__title"><span class="filter__num">16</span> Cool Lab Slip</h3>
+          
+          <div class="strip" role="region" tabindex="0" aria-label="Cool Lab Slip sample shots, scrolls sideways">
+            <picture><source type="image/webp" srcset="static/images/lab-archive-vol-1-cspro/preview/16-cool-lab-slip-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/16-cool-lab-slip-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" /><img class="strip__img" src="static/images/lab-archive-vol-1-cspro/preview/16-cool-lab-slip-2400.webp" srcset="static/images/lab-archive-vol-1-cspro/preview/16-cool-lab-slip-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/16-cool-lab-slip-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" width="2400" height="365" alt="Cool Lab Slip: sample photos through the filter" loading="lazy" decoding="async" /></picture>
+          </div>
+          
+          <div class="filter__body">
+            <div class="prose filter__desc"><p>A study of the common cool drift introduced by lab calibration and budget scanners.</p>
+<p>Shadows shift toward blue magenta while highlights remain near neutral, preserving credibility in skin and paper whites.</p>
+<p>The net effect is a subtle dissonance; neon hums, store fronts glow, and night streets feel freshly washed.</p>
+<p><em>Why it matters:</em> many archives owe their mood to process, not shooting. This filter reproduces that specific slip with control, allowing you to carry the atmosphere without inheriting the chaos.</p>
+<p><em>When to use:</em> night work, wet pavements, interiors with mixed LED. Daylight will read cooler but serviceable; the profile earns its keep after sunset.</p>
+<p><em>Finishing:</em> bloom on point light sources completes the scan -era memory; keep grain modest to avoid muddying the cool shadow architecture.</p></div>
+            
+            <aside class="source" aria-label="Inspired by Agfa Vista 200">
+              <picture><source type="image/webp" srcset="static/images/source-images/agfa-vista-200-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" /><img class="source__img" src="static/images/source-images/agfa-vista-200-640.webp" srcset="static/images/source-images/agfa-vista-200-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" width="640" height="360" alt="Agfa Vista 200" loading="lazy" decoding="async" /></picture>
+              <div>
+                <p class="source__title">Inspired by Agfa Vista 200</p>
+                <div class="prose source__desc"><p>Consumer color negative, broadly available across Europe and parts of Asia through the late 90s and 2000.</p>
+<p>Favoured by casual shooters for affordable pricing and forgiving exposure, yet immediately identifiable to printers for its magenta bias and lively greens. Typical usage: holidays, street, family albums.</p>
+<p>Vista 200 served the mass market and, by volume alone, defined a generation of drugstore prints.</p></div>
+              </div>
+            </aside>
+            
+          </div>
+          <div class="download">
+            <label class="download__label" for="slot-cool-lab-slip">Camera slot</label>
+            <select id="slot-cool-lab-slip" class="download__select" data-slot-select>
+              <option value="std" selected>Standard (std.flt)</option>
+              <option value="vtg1">Vintage 1 (vtg1.flt)</option>
+              <option value="vtg2">Vintage 2 (vtg2.flt)</option>
+              <option value="bw">B&amp;W (bw.flt)</option>
+              
+            </select>
+            <a class="btn btn--primary download__btn" href="filters/lab-archive-vol-1-cspro/cool-lab-slip.flt" download="std.flt" data-filter="cool-lab-slip" data-name="Cool Lab Slip"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg>
+<span data-download-label>Download as std.flt</span></a>
+          </div>
+        </section>
+        
+        <section class="filter" id="riviera-cyanotype" aria-labelledby="riviera-cyanotype-title">
+          <h3 id="riviera-cyanotype-title" class="filter__title"><span class="filter__num">17</span> Riviera Cyanotype</h3>
+          
+          <div class="strip" role="region" tabindex="0" aria-label="Riviera Cyanotype sample shots, scrolls sideways">
+            <picture><source type="image/webp" srcset="static/images/lab-archive-vol-1-cspro/preview/17-riviera-cyanotype-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/17-riviera-cyanotype-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" /><img class="strip__img" src="static/images/lab-archive-vol-1-cspro/preview/17-riviera-cyanotype-2400.webp" srcset="static/images/lab-archive-vol-1-cspro/preview/17-riviera-cyanotype-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/17-riviera-cyanotype-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" width="2400" height="298" alt="Riviera Cyanotype: sample photos through the filter" loading="lazy" decoding="async" /></picture>
+          </div>
+          
+          <div class="filter__body">
+            <div class="prose filter__desc"><p>Inspired by coastal negatives and travel transparencies of the 60s to 80s.</p>
+<p>This profile compresses glare and accentuates the blue cyan register typical of seaside postcard color.</p>
+<p>Whites remain pure but textured; seafoam greens lean toward teal, anchoring the Mediterranean ideal of chromatic cleanliness.</p>
+<p><em>Why it matters:</em> overexposed daylight near water demands control, not restraint. This filter models the blue channel compression once achieved through precise enlarger filtration, preserving detail without bleaching.</p>
+<p><em>When to use:</em> maritime daylight, harbours, and reflective architecture. It translates both sky and sea without surrendering midtone neutrality.</p>
+<p><em>Finishing:</em> slight clarity enhancement reinforces the mineral texture of salt and sand; minimal grain keeps the image modern yet tactile.</p></div>
+            
+            <aside class="source" aria-label="Inspired by Konica Centuria 100">
+              <picture><source type="image/webp" srcset="static/images/source-images/konica-centuria-100-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" /><img class="source__img" src="static/images/source-images/konica-centuria-100-640.webp" srcset="static/images/source-images/konica-centuria-100-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" width="640" height="366" alt="Konica Centuria 100" loading="lazy" decoding="async" /></picture>
+              <div>
+                <p class="source__title">Inspired by Konica Centuria 100</p>
+                <div class="prose source__desc"><p>Late 90s consumer negative with a recognizable magenta-green dialogue and fine grain for ISO 100.</p>
+<p>Popular in point and shoots and compact SLRs across Asia and Europe.</p>
+<p>Centuria prints often revealed flattering skin with an atmospheric cast, especially under overcast daylight.</p>
+<p>It sits apart from Kodak's warmth and Fuji's cool order: slightly mannered, but charming in the right scene.</p></div>
+              </div>
+            </aside>
+            
+          </div>
+          <div class="download">
+            <label class="download__label" for="slot-riviera-cyanotype">Camera slot</label>
+            <select id="slot-riviera-cyanotype" class="download__select" data-slot-select>
+              <option value="std" selected>Standard (std.flt)</option>
+              <option value="vtg1">Vintage 1 (vtg1.flt)</option>
+              <option value="vtg2">Vintage 2 (vtg2.flt)</option>
+              <option value="bw">B&amp;W (bw.flt)</option>
+              
+            </select>
+            <a class="btn btn--primary download__btn" href="filters/lab-archive-vol-1-cspro/riviera-cyanotype.flt" download="std.flt" data-filter="riviera-cyanotype" data-name="Riviera Cyanotype"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg>
+<span data-download-label>Download as std.flt</span></a>
+          </div>
+        </section>
+        
+        <section class="filter" id="chromatic-storybook" aria-labelledby="chromatic-storybook-title">
+          <h3 id="chromatic-storybook-title" class="filter__title"><span class="filter__num">18</span> Chromatic Storybook</h3>
+          
+          <div class="strip" role="region" tabindex="0" aria-label="Chromatic Storybook sample shots, scrolls sideways">
+            <picture><source type="image/webp" srcset="static/images/lab-archive-vol-1-cspro/preview/18-chromatic-storybook-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/18-chromatic-storybook-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" /><img class="strip__img" src="static/images/lab-archive-vol-1-cspro/preview/18-chromatic-storybook-2400.webp" srcset="static/images/lab-archive-vol-1-cspro/preview/18-chromatic-storybook-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/18-chromatic-storybook-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" width="2400" height="399" alt="Chromatic Storybook: sample photos through the filter" loading="lazy" decoding="async" /></picture>
+          </div>
+          
+          <div class="filter__body">
+            <div class="prose filter__desc"><p>A controlled exaggeration of color separation inspired by late century art direction and Wes Anderson's engineered palettes.</p>
+<p>Saturation climbs beyond natural register, shadows compress, and highlights bloom into cream. Every hue moves toward its pastel apex; turquoise skies, peach skin, ochre stone.</p>
+<p>The result is theatrical rather than realistic, yet still grounded in photographic tone curves.</p>
+<p><em>Why it matters:</em> this is a study in deliberate excess, what happens when harmony overrides fidelity. It recalls the precision of chemically manipulated reversal film, where hue placement became composition.</p>
+<p><em>When to use:</em> constructed sets, fashion, editorial stills, or any frame seeking narrative artifice. A little goes far.</p>
+<p><em>Finishing:</em> add mild diffusion or tilt shift blur for dioramic effect; avoid extra saturation, the look already sings.</p></div>
+            
+            <aside class="source" aria-label="Inspired by Wes Anderson">
+              <picture><source type="image/webp" srcset="static/images/source-images/wes-anderson-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" /><img class="source__img" src="static/images/source-images/wes-anderson-640.webp" srcset="static/images/source-images/wes-anderson-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" width="640" height="366" alt="Wes Anderson" loading="lazy" decoding="async" /></picture>
+              <div>
+                <p class="source__title">Inspired by Wes Anderson</p>
+                <div class="prose source__desc"><p>A director's palette rather than a single emulsion: disciplined symmetry, clean primaries and pastels, and measured contrast.</p>
+<p>The reference here concerns color management and tone rather than chemistry; how a scene is balanced so that hues converse without shouting.</p>
+<p>Use as a study in restraint and composition, not a shortcut to quirk.</p></div>
+              </div>
+            </aside>
+            
+          </div>
+          <div class="download">
+            <label class="download__label" for="slot-chromatic-storybook">Camera slot</label>
+            <select id="slot-chromatic-storybook" class="download__select" data-slot-select>
+              <option value="std" selected>Standard (std.flt)</option>
+              <option value="vtg1">Vintage 1 (vtg1.flt)</option>
+              <option value="vtg2">Vintage 2 (vtg2.flt)</option>
+              <option value="bw">B&amp;W (bw.flt)</option>
+              
+            </select>
+            <a class="btn btn--primary download__btn" href="filters/lab-archive-vol-1-cspro/chromatic-storybook.flt" download="std.flt" data-filter="chromatic-storybook" data-name="Chromatic Storybook"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg>
+<span data-download-label>Download as std.flt</span></a>
+          </div>
+        </section>
+        
+        <section class="filter" id="isle-of-ochre" aria-labelledby="isle-of-ochre-title">
+          <h3 id="isle-of-ochre-title" class="filter__title"><span class="filter__num">19</span> Isle of Ochre</h3>
+          
+          <div class="strip" role="region" tabindex="0" aria-label="Isle of Ochre sample shots, scrolls sideways">
+            <picture><source type="image/webp" srcset="static/images/lab-archive-vol-1-cspro/preview/19-isle-of-ochre-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/19-isle-of-ochre-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" /><img class="strip__img" src="static/images/lab-archive-vol-1-cspro/preview/19-isle-of-ochre-2400.webp" srcset="static/images/lab-archive-vol-1-cspro/preview/19-isle-of-ochre-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/19-isle-of-ochre-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" width="2400" height="399" alt="Isle of Ochre: sample photos through the filter" loading="lazy" decoding="async" /></picture>
+          </div>
+          
+          <div class="filter__body">
+            <div class="prose filter__desc"><p>A pigment biased treatment referencing the ochre deserts and sun bleached towns of Anderson's imagined worlds.</p>
+<p>Blues and greens withdraw into beige; yellows dominate with the dryness of expired slide film stored too warm. Shadows carry fine dust, and midtones flatten to the texture of paper.</p>
+<p>The frame reads like an archival print found inside a travel log rather than a contemporary exposure.</p>
+<p><em>Why it matters:</em> this look reproduces the thermal shift of aged reversal stock; a poetic, credible warmth unachievable by simple tinting. It gives daylight scenes an immediate sense of location and era.</p>
+<p><em>When to use:</em> exteriors, road narratives, sun aged architecture, or portraits needing cinematic dryness. Best under clear light.</p>
+<p><em>Finishing:</em> add halation to emulate heat haze; light grain reinforces the tactile surface of pigment paper.</p></div>
+            
+            <aside class="source" aria-label="Inspired by Wes Anderson">
+              <picture><source type="image/webp" srcset="static/images/source-images/wes-anderson-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" /><img class="source__img" src="static/images/source-images/wes-anderson-640.webp" srcset="static/images/source-images/wes-anderson-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" width="640" height="366" alt="Wes Anderson" loading="lazy" decoding="async" /></picture>
+              <div>
+                <p class="source__title">Inspired by Wes Anderson</p>
+                <div class="prose source__desc"><p>A director's palette rather than a single emulsion: disciplined symmetry, clean primaries and pastels, and measured contrast.</p>
+<p>The reference here concerns color management and tone rather than chemistry; how a scene is balanced so that hues converse without shouting.</p>
+<p>Use as a study in restraint and composition, not a shortcut to quirk.</p></div>
+              </div>
+            </aside>
+            
+          </div>
+          <div class="download">
+            <label class="download__label" for="slot-isle-of-ochre">Camera slot</label>
+            <select id="slot-isle-of-ochre" class="download__select" data-slot-select>
+              <option value="std" selected>Standard (std.flt)</option>
+              <option value="vtg1">Vintage 1 (vtg1.flt)</option>
+              <option value="vtg2">Vintage 2 (vtg2.flt)</option>
+              <option value="bw">B&amp;W (bw.flt)</option>
+              
+            </select>
+            <a class="btn btn--primary download__btn" href="filters/lab-archive-vol-1-cspro/isle-of-ochre.flt" download="std.flt" data-filter="isle-of-ochre" data-name="Isle of Ochre"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg>
+<span data-download-label>Download as std.flt</span></a>
+          </div>
+        </section>
+        
+        <section class="filter" id="moody-bw" aria-labelledby="moody-bw-title">
+          <h3 id="moody-bw-title" class="filter__title"><span class="filter__num">20</span> Moody B&amp;W</h3>
+          
+          <div class="strip" role="region" tabindex="0" aria-label="Moody B&amp;W sample shots, scrolls sideways">
+            <picture><source type="image/webp" srcset="static/images/lab-archive-vol-1-cspro/preview/20-moody-bw-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/20-moody-bw-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" /><img class="strip__img" src="static/images/lab-archive-vol-1-cspro/preview/20-moody-bw-2400.webp" srcset="static/images/lab-archive-vol-1-cspro/preview/20-moody-bw-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/20-moody-bw-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" width="2400" height="407" alt="Moody B&amp;W: sample photos through the filter" loading="lazy" decoding="async" /></picture>
+          </div>
+          
+          <div class="filter__body">
+            <div class="prose filter__desc"><p>A monochrome rendering that privileges atmosphere over clinical detail.</p>
+<p>Skies and seas accumulate weight, midtones rest lower for a classical print feel. Edges remain present but not knife edged, allowing faces and weather to share the frame without competition. The overall read is contemplative rather than aggressive.</p>
+<p><em>Why it matters:</em> not all black and white must announce itself with punch. This treatment honours nuance; fog banks, stone, and skin read as materials, not illustrations.</p>
+<p><em>When to use:</em> Overcast days, coastal work, portraits that benefit from quiet. Meter thoughtfully, placing key tones is the craft here.</p>
+<p><em>Finishing:</em> add a subtle vignette and a fine grain to complete the silver print impression.</p></div>
+            
+            <aside class="source" aria-label="Inspired by Ilford FP4 Plus">
+              <picture><source type="image/webp" srcset="static/images/source-images/ilford-fp4-plus-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" /><img class="source__img" src="static/images/source-images/ilford-fp4-plus-640.webp" srcset="static/images/source-images/ilford-fp4-plus-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" width="640" height="366" alt="Ilford FP4 Plus" loading="lazy" decoding="async" /></picture>
+              <div>
+                <p class="source__title">Inspired by Ilford FP4 Plus</p>
+                <div class="prose source__desc"><p>Panchromatic black and white negative with lineage to 30s Ilford FP stocks, modernized as FP4 Plus.</p>
+<p>Recognized for fine grain, credible edge sharpness, and wide exposure latitude that tolerates both bright sun and open shade. Favoured by documentarians and students alike for its forgiving curve and classic print tonality.</p>
+<p>In silver, FP4 Plus renders textured subjects like wood, skin, stone with a soft authority and a calm highlight shoulder.</p></div>
+              </div>
+            </aside>
+            
+          </div>
+          <div class="download">
+            <label class="download__label" for="slot-moody-bw">Camera slot</label>
+            <select id="slot-moody-bw" class="download__select" data-slot-select>
+              <option value="std">Standard (std.flt)</option>
+              <option value="vtg1">Vintage 1 (vtg1.flt)</option>
+              <option value="vtg2">Vintage 2 (vtg2.flt)</option>
+              <option value="bw" selected>B&amp;W (bw.flt)</option>
+              
+            </select>
+            <a class="btn btn--primary download__btn" href="filters/lab-archive-vol-1-cspro/moody-bw.flt" download="bw.flt" data-filter="moody-bw" data-name="Moody B&amp;W"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg>
+<span data-download-label>Download as bw.flt</span></a>
+          </div>
+        </section>
+        
+        <section class="filter" id="textured-bw" aria-labelledby="textured-bw-title">
+          <h3 id="textured-bw-title" class="filter__title"><span class="filter__num">21</span> Textured B&amp;W</h3>
+          
+          <div class="strip" role="region" tabindex="0" aria-label="Textured B&amp;W sample shots, scrolls sideways">
+            <picture><source type="image/webp" srcset="static/images/lab-archive-vol-1-cspro/preview/21-textured-bw-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/21-textured-bw-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" /><img class="strip__img" src="static/images/lab-archive-vol-1-cspro/preview/21-textured-bw-2400.webp" srcset="static/images/lab-archive-vol-1-cspro/preview/21-textured-bw-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/21-textured-bw-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" width="2400" height="407" alt="Textured B&amp;W: sample photos through the filter" loading="lazy" decoding="async" /></picture>
+          </div>
+          
+          <div class="filter__body">
+            <div class="prose filter__desc"><p>A study in surface.</p>
+<p>The curve is shaped to lift detail in wood grain, fabric, and skin while keeping the overall contrast moderate. Highlights sit just beneath glare; blacks hold form at the edge of shadow. The intent is tactility; you can feel the wall, the handrail, the wrinkle in a coat.</p>
+<p><em>Why it matters:</em> many subjects are about touch rather than outline. This profile respects micro structure without descending into harshness, making it suitable for tight portraits and urban details alike.</p>
+<p><em>When to use:</em> close work, architectural studies, street fragments.</p>
+<p><em>Finishing:</em> gentle diffusion can lend a fine art surface, keep grain modest so texture, not noise, leads.</p></div>
+            
+            <aside class="source" aria-label="Inspired by Ilford FP4 Plus">
+              <picture><source type="image/webp" srcset="static/images/source-images/ilford-fp4-plus-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" /><img class="source__img" src="static/images/source-images/ilford-fp4-plus-640.webp" srcset="static/images/source-images/ilford-fp4-plus-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" width="640" height="366" alt="Ilford FP4 Plus" loading="lazy" decoding="async" /></picture>
+              <div>
+                <p class="source__title">Inspired by Ilford FP4 Plus</p>
+                <div class="prose source__desc"><p>Panchromatic black and white negative with lineage to 30s Ilford FP stocks, modernized as FP4 Plus.</p>
+<p>Recognized for fine grain, credible edge sharpness, and wide exposure latitude that tolerates both bright sun and open shade. Favoured by documentarians and students alike for its forgiving curve and classic print tonality.</p>
+<p>In silver, FP4 Plus renders textured subjects like wood, skin, stone with a soft authority and a calm highlight shoulder.</p></div>
+              </div>
+            </aside>
+            
+          </div>
+          <div class="download">
+            <label class="download__label" for="slot-textured-bw">Camera slot</label>
+            <select id="slot-textured-bw" class="download__select" data-slot-select>
+              <option value="std">Standard (std.flt)</option>
+              <option value="vtg1">Vintage 1 (vtg1.flt)</option>
+              <option value="vtg2">Vintage 2 (vtg2.flt)</option>
+              <option value="bw" selected>B&amp;W (bw.flt)</option>
+              
+            </select>
+            <a class="btn btn--primary download__btn" href="filters/lab-archive-vol-1-cspro/textured-bw.flt" download="bw.flt" data-filter="textured-bw" data-name="Textured B&amp;W"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg>
+<span data-download-label>Download as bw.flt</span></a>
+          </div>
+        </section>
+        
+        <section class="filter" id="charcoal-depth" aria-labelledby="charcoal-depth-title">
+          <h3 id="charcoal-depth-title" class="filter__title"><span class="filter__num">22</span> Charcoal Depth</h3>
+          
+          <div class="strip" role="region" tabindex="0" aria-label="Charcoal Depth sample shots, scrolls sideways">
+            <picture><source type="image/webp" srcset="static/images/lab-archive-vol-1-cspro/preview/22-charcoal-depth-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/22-charcoal-depth-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" /><img class="strip__img" src="static/images/lab-archive-vol-1-cspro/preview/22-charcoal-depth-2400.webp" srcset="static/images/lab-archive-vol-1-cspro/preview/22-charcoal-depth-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/22-charcoal-depth-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" width="2400" height="407" alt="Charcoal Depth: sample photos through the filter" loading="lazy" decoding="async" /></picture>
+          </div>
+          
+          <div class="filter__body">
+            <div class="prose filter__desc"><p>A heavy monochrome with decisive blacks.</p>
+<p>Greens in the original scene tend to fall hardest, producing deep wells of tone, blues sit slightly higher to preserve separation around sky and signage. Edges read as silhouette and contour rather than micro detail.</p>
+<p>It is unapologetically graphic, a print that announces the shape of things.</p>
+<p><em>Why it matters:</em> some frames benefit from severity. This profile gives you the poster strength of tarry blacks without losing navigational cues.</p>
+<p><em>When to use:</em> stairwells, alleyways, night streets, portraits requiring authority over gentleness. Expose for the midtone you cannot afford to lose, let the rest fall where it will.</p>
+<p><em>Finishing:</em> a controlled vignette will trap the gaze, consider edge blur to emphasize mass over texture.</p></div>
+            
+            <aside class="source" aria-label="Inspired by Ilford XP2 Super">
+              <picture><source type="image/webp" srcset="static/images/source-images/ilford-xp2-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" /><img class="source__img" src="static/images/source-images/ilford-xp2-640.webp" srcset="static/images/source-images/ilford-xp2-640.webp 640w" sizes="(max-width: 767px) 6rem, 10rem" width="640" height="366" alt="Ilford XP2 Super" loading="lazy" decoding="async" /></picture>
+              <div>
+                <p class="source__title">Inspired by Ilford XP2 Super</p>
+                <div class="prose source__desc"><p>Chromogenic black and white negative designed for C-41 processing, introduced to give monochrome workers access to color minilabs.</p>
+<p>Produces smooth mids with crisp edge definition and a characteristic clarity in whites.</p>
+<p>Studios and newspapers valued XP2 for speed of turnaround and consistency across labs.</p>
+<p>Its look is modern: clean highlights, deep blacks, and a forgiving toe that preserves form where silver stocks might clip.</p></div>
+              </div>
+            </aside>
+            
+          </div>
+          <div class="download">
+            <label class="download__label" for="slot-charcoal-depth">Camera slot</label>
+            <select id="slot-charcoal-depth" class="download__select" data-slot-select>
+              <option value="std">Standard (std.flt)</option>
+              <option value="vtg1">Vintage 1 (vtg1.flt)</option>
+              <option value="vtg2">Vintage 2 (vtg2.flt)</option>
+              <option value="bw" selected>B&amp;W (bw.flt)</option>
+              
+            </select>
+            <a class="btn btn--primary download__btn" href="filters/lab-archive-vol-1-cspro/charcoal-depth.flt" download="bw.flt" data-filter="charcoal-depth" data-name="Charcoal Depth"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg>
+<span data-download-label>Download as bw.flt</span></a>
+          </div>
+        </section>
+        
+        <section class="filter" id="neutral" aria-labelledby="neutral-title">
+          <h3 id="neutral-title" class="filter__title"><span class="filter__num">23</span> Neutral</h3>
+          
+          <div class="strip" role="region" tabindex="0" aria-label="Neutral sample shots, scrolls sideways">
+            <picture><source type="image/webp" srcset="static/images/lab-archive-vol-1-cspro/preview/23-neutral-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/23-neutral-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" /><img class="strip__img" src="static/images/lab-archive-vol-1-cspro/preview/23-neutral-2400.webp" srcset="static/images/lab-archive-vol-1-cspro/preview/23-neutral-1200.webp 1200w, static/images/lab-archive-vol-1-cspro/preview/23-neutral-2400.webp 2400w" sizes="(max-width: 767px) 1034px, (max-width: 1100px) calc(100vw - 4rem), 1036px" width="2400" height="407" alt="Neutral: sample photos through the filter" loading="lazy" decoding="async" /></picture>
+          </div>
+          
+          <div class="filter__body">
+            <div class="prose filter__desc"><p>A technical baseline rather than an aesthetic profile.</p>
+<p>This preset disables stylistic bias to produce a pure, uncoloured image from the CampSnap Pro sensor.</p>
+<p>It exists for those who wish to author their own look or test the camera's raw behaviour.</p></div>
+            
+            <aside class="source" aria-label="Inspired by CampSnap Pro">
+              <picture><source type="image/webp" srcset="static/images/source-images/campsnap-pro-960.webp 960w" sizes="(max-width: 767px) 6rem, 10rem" /><img class="source__img" src="static/images/source-images/campsnap-pro-960.webp" srcset="static/images/source-images/campsnap-pro-960.webp 960w" sizes="(max-width: 767px) 6rem, 10rem" width="960" height="548" alt="CampSnap Pro" loading="lazy" decoding="async" /></picture>
+              <div>
+                <p class="source__title">Inspired by CampSnap Pro</p>
+                <div class="prose source__desc"><p>The CampSnap Pro is a purpose-built digital compact that behaves like a mechanical camera. Designed for immediacy rather than automation.</p>
+<p>It uses a 1/1.8-inch CMOS sensor behind a fixed 25 mm f/2 lens, and an optical-style control interface that prioritizes exposure discipline over menu depth.</p>
+<p>There are no screens, no previews, only decisions.</p>
+<p>Get yours at https://www.campsnapphoto.com/products/cs-pro-camera</p></div>
+              </div>
+            </aside>
+            
+          </div>
+          <div class="download">
+            <label class="download__label" for="slot-neutral">Camera slot</label>
+            <select id="slot-neutral" class="download__select" data-slot-select>
+              <option value="std" selected>Standard (std.flt)</option>
+              <option value="vtg1">Vintage 1 (vtg1.flt)</option>
+              <option value="vtg2">Vintage 2 (vtg2.flt)</option>
+              <option value="bw">B&amp;W (bw.flt)</option>
+              
+            </select>
+            <a class="btn btn--primary download__btn" href="filters/lab-archive-vol-1-cspro/neutral.flt" download="std.flt" data-filter="neutral" data-name="Neutral"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg>
+<span data-download-label>Download as std.flt</span></a>
+          </div>
+        </section>
+        
       </section>
-      <footer>
-        <div class="copyright">©2026 James Macmillan. All Rights Reserved.</div>
-        <div class="policies">
-          <a href="https://codesthings.com/about-cookies">About Cookies</a>
-          <a href="https://codesthings.com/privacy-notice">Privacy Notice</a>
-          <a href="https://github.com/jamescodesthings/campsnap">GitHub</a>
+      
+
+      <section id="cs-pro" class="page-section container" aria-labelledby="cs-pro-title">
+        <h2 id="cs-pro-title" class="section-title">About the CS Pro</h2>
+        <div class="cs-pro">
+          <picture><source type="image/webp" srcset="static/images/source-images/campsnap-pro-960.webp 960w" sizes="(max-width: 767px) calc(100vw - 2.5rem), 24rem" /><img class="cs-pro__img" src="static/images/source-images/campsnap-pro-960.webp" srcset="static/images/source-images/campsnap-pro-960.webp 960w" sizes="(max-width: 767px) calc(100vw - 2.5rem), 24rem" width="960" height="548" alt="The CampSnap Pro camera" loading="lazy" decoding="async" /></picture>
+          <div class="cs-pro__text">
+            <p>The CampSnap Pro is CampSnap's simple, pocketable digital camera, made to shoot like a film point-and-shoot.</p>
+            <p>It reads its looks from <code>.flt</code> filter files on the memory card, one for each of four slots on the mode dial: Standard, Vintage 1, Vintage 2 and B&amp;W. Swap a file and that slot shoots with a new look.</p>
+            <ul class="link-list">
+              <li><a class="text-link" href="https://www.campsnapphoto.com/" target="_blank" rel="noopener noreferrer">CampSnap<svg
+  class="icon "
+  width="16"
+  height="16"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M15 3h6v6" /><path d="M10 14 21 3" /><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /></svg>
+<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+              <li><a class="text-link" href="https://filters.campsnapphoto.com/" target="_blank" rel="noopener noreferrer">CampSnap's own filter tool<svg
+  class="icon "
+  width="16"
+  height="16"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M15 3h6v6" /><path d="M10 14 21 3" /><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /></svg>
+<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+              <li><a class="text-link" href="https://www.reddit.com/r/CampSnap/" target="_blank" rel="noopener noreferrer">r/CampSnap<svg
+  class="icon "
+  width="16"
+  height="16"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M15 3h6v6" /><path d="M10 14 21 3" /><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /></svg>
+<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+            </ul>
+          </div>
         </div>
-      </footer>
-    </section>
+      </section>
+
+      <section id="tag-me" class="page-section container" aria-labelledby="tag-me-title">
+        <div class="tag-me">
+          <h2 id="tag-me-title" class="section-title">Show me what you shoot</h2>
+          <p>Posting photos taken with these filters? Tag me. I love seeing them out in the wild.</p>
+          <a class="btn btn--secondary" href="https://www.instagram.com/jamescodesthings/" target="_blank" rel="noopener noreferrer"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><rect x="2" y="2" width="20" height="20" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><path d="M17.5 6.5h.01" /></svg>
+<span>Instagram @jamescodesthings</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+        </div>
+      </section>
+
+      
+      <section id="credits" class="page-section container" aria-labelledby="credits-title">
+        <h2 id="credits-title" class="section-title">Credits</h2>
+        <p class="section-lede">This pack was made by James Macmillan. Thanks to these people for making their photos available:</p>
+        <ul class="credits">
+          
+          <li><a href="https://unsplash.com/@benjaminguy" rel="noopener">Benjamin Guy</a> <span class="credits__org">on <a href="https://unsplash.com/photos/HPWYpcHwKAU" rel="noopener">Unsplash</a></span></li>
+          
+          <li><a href="https://unsplash.com/@chrisjoelcampbell" rel="noopener">Christopher Campbell</a> <span class="credits__org">on <a href="https://unsplash.com/photos/rDEOVtE7vOs" rel="noopener">Unsplash</a></span></li>
+          
+          <li><a href="https://unsplash.com/@heftiba" rel="noopener">Toa Heftiba</a> <span class="credits__org">on <a href="https://unsplash.com/photos/x9I-6yoXrXE" rel="noopener">Unsplash</a></span></li>
+          
+          <li><a href="https://unsplash.com/@trail_mix_mike" rel="noopener">Michael McKay</a> <span class="credits__org">on <a href="https://unsplash.com/photos/GQ2Qf-JeGpg" rel="noopener">Unsplash</a></span></li>
+          
+          <li><a href="https://unsplash.com/@claybanks" rel="noopener">Clay Banks</a> <span class="credits__org">on <a href="https://unsplash.com/photos/YOmO1tg7lrA" rel="noopener">Unsplash</a></span></li>
+          
+          <li><a href="https://commons.wikimedia.org/wiki/User:Willwongprd" rel="noopener">Willwongprd</a> <span class="credits__org">on <a href="https://commons.wikimedia.org/wiki/File:Kodak_Gold_200_Film_Retail_Package.jpg" rel="noopener">Wikimedia Commons</a></span></li>
+          
+          <li><a href="https://unsplash.com/@gvz42" rel="noopener">GVZ 42</a> <span class="credits__org">on <a href="https://unsplash.com/photos/Ffw-eh5e1Rw" rel="noopener">Unsplash</a></span></li>
+          
+          <li><a href="https://unsplash.com/@mynameisiknow" rel="noopener">Ainur Iman</a> <span class="credits__org">on <a href="https://unsplash.com/photos/OurUUufRS1I" rel="noopener">Unsplash</a></span></li>
+          
+          <li><a href="https://unsplash.com/@surface" rel="noopener">Surface</a> <span class="credits__org">on <a href="https://unsplash.com/photos/GUPqey7k7b4" rel="noopener">Unsplash</a></span></li>
+          
+          <li><a href="https://unsplash.com/@willianjusten" rel="noopener">Willian Justen de Vasconcellos</a> <span class="credits__org">on <a href="https://unsplash.com/photos/izTYY7Vlumg" rel="noopener">Unsplash</a></span></li>
+          
+          <li><a href="https://unsplash.com/@john_matychuk" rel="noopener">John Matychuk</a> <span class="credits__org">on <a href="https://unsplash.com/photos/dJdcb11aboQ" rel="noopener">Unsplash</a></span></li>
+          
+          <li><a href="https://unsplash.com/@itskabita" rel="noopener">kabita Darlami</a> <span class="credits__org">on <a href="https://unsplash.com/photos/2j75IgzsFzo" rel="noopener">Unsplash</a></span></li>
+          
+          <li><a href="https://unsplash.com/@rikokurnia41" rel="noopener">Riko Kurnia</a> <span class="credits__org">on <a href="https://unsplash.com/photos/FpSrfPOS0d4" rel="noopener">Unsplash</a></span></li>
+          
+          <li><a href="https://unsplash.com/@konradweber" rel="noopener">Konrad Weber</a> <span class="credits__org">on <a href="https://unsplash.com/photos/L1n9zASYDUs" rel="noopener">Unsplash</a></span></li>
+          
+          <li><a href="https://unsplash.com/@phlmrtn" rel="noopener">Philip Martin</a> <span class="credits__org">on <a href="https://unsplash.com/photos/5aGUyCW_PJw" rel="noopener">Unsplash</a></span></li>
+          
+          <li><a href="https://unsplash.com/@ashishjha" rel="noopener">Avinash Kumar</a> <span class="credits__org">on <a href="https://unsplash.com/photos/ZTuxiPQs3ao" rel="noopener">Unsplash</a></span></li>
+          
+          <li><a href="https://unsplash.com/@switch_dtp_fotografie" rel="noopener">Lucas Van Oort</a> <span class="credits__org">on <a href="https://unsplash.com/photos/jPH059sQQzw" rel="noopener">Unsplash</a></span></li>
+          
+          <li><a href="https://www.flickr.com/photos/31975473@N02/" rel="noopener">DA★AutoManiA</a> <span class="credits__org">on <a href="https://www.flickr.com/photos/31975473@N02/13103318745/" rel="noopener">Flickr</a></span></li>
+          
+          <li><a href="https://unsplash.com/@gergard" rel="noopener">German Engelgardt</a> <span class="credits__org">on <a href="https://unsplash.com/photos/EttCofU83gM" rel="noopener">Unsplash</a></span></li>
+          
+          <li><a href="https://unsplash.com/@photoholgic" rel="noopener">Photoholgic</a> <span class="credits__org">on <a href="https://unsplash.com/photos/xFkO2AAKc3A" rel="noopener">Unsplash</a></span></li>
+          
+          <li><a href="https://www.flickr.com/people/12836528@N00" rel="noopener">Kevin Dooley</a> <span class="credits__org">on <a href="https://commons.wikimedia.org/wiki/File:Fuji_film_Velvia.jpg" rel="noopener">Wikimedia Commons</a></span></li>
+          
+          <li><a href="https://unsplash.com/@priscilladupreez" rel="noopener">Priscilla Du Preez</a> <span class="credits__org">on <a href="https://unsplash.com/photos/W3SEyZODn8U" rel="noopener">Unsplash</a></span></li>
+          
+          <li><a href="https://unsplash.com/@sigmund" rel="noopener">Sigmund</a> <span class="credits__org">on <a href="https://unsplash.com/photos/hQnEUjW825U" rel="noopener">Unsplash</a></span></li>
+          
+          <li><a href="https://unsplash.com/@rikokurnia41" rel="noopener">Riko Kurnia</a> <span class="credits__org">on <a href="https://unsplash.com/photos/1Fh8utNmgZ4" rel="noopener">Unsplash</a></span></li>
+          
+          <li><a href="https://www.flickr.com/photos/chromedecay/" rel="noopener">Chromedecay</a> <span class="credits__org">on <a href="https://www.flickr.com/photos/chromedecay/5149361829/" rel="noopener">Flickr</a></span></li>
+          
+          <li><a href="https://unsplash.com/@theranaman" rel="noopener">Raj Rana</a> <span class="credits__org">on <a href="https://unsplash.com/photos/15Vb4B_ma_s" rel="noopener">Unsplash</a></span></li>
+          
+          <li><a href="https://unsplash.com/@considerateagency" rel="noopener">Considerate Agency</a> <span class="credits__org">on <a href="https://unsplash.com/photos/UrzN-8K1PCE" rel="noopener">Unsplash</a></span></li>
+          
+          <li><a href="https://unsplash.com/@heftiba" rel="noopener">Toa Heftiba</a> <span class="credits__org">on <a href="https://unsplash.com/photos/x9I-6yoXrXE" rel="noopener">Unsplash</a></span></li>
+          
+          <li><a href="https://www.pexels.com/@fotios-photos/" rel="noopener">Lisa from Pexels</a> <span class="credits__org">on <a href="https://www.pexels.com/photo/person-holding-polaroid-color-i-type-film-box-2271915/" rel="noopener">Pexels</a></span></li>
+          
+          <li><a href="https://unsplash.com/@bady" rel="noopener">Bady Abbas</a> <span class="credits__org">on <a href="https://unsplash.com/photos/yXwdLSYSaFc" rel="noopener">Unsplash</a></span></li>
+          
+          <li><a href="https://commons.wikimedia.org/wiki/User:Anasrahmoun" rel="noopener">Anasrahmoun</a> <span class="credits__org">on <a href="https://commons.wikimedia.org/wiki/File:Konica_Centuria_Super_100.jpg" rel="noopener">Wikimedia Commons</a></span></li>
+          
+          <li><a href="https://unsplash.com/@gkumar2175" rel="noopener">Ganapathy Kumar</a> <span class="credits__org">on <a href="https://unsplash.com/photos/L75D18aVal8" rel="noopener">Unsplash</a></span></li>
+          
+          <li><a href="https://commons.wikimedia.org/wiki/User:Martin_Kraft" rel="noopener">Martin Kraft</a> <span class="credits__org">on <a href="https://commons.wikimedia.org/wiki/File:MJK_08478_Wes_Anderson_(Opening_Gala_Berlinale_2018).jpg" rel="noopener">Wikimedia Commons</a></span></li>
+          
+          <li><a href="https://unsplash.com/@frostroomhead" rel="noopener">Rodion Kutsaiev</a> <span class="credits__org">on <a href="https://unsplash.com/photos/PEm_sLmJT-w" rel="noopener">Unsplash</a></span></li>
+          
+          <li><a href="https://commons.wikimedia.org/wiki/User:PetarM" rel="noopener">Petar Milošević</a> <span class="credits__org">on <a href="https://commons.wikimedia.org/wiki/File:Ilford_XP2_super_400.jpg" rel="noopener">Wikimedia Commons</a></span></li>
+          
+        </ul>
+        <p class="credits__thanks">And thanks to the team at <a href="https://www.campsnapphoto.com/" rel="noopener">CampSnap</a> for making a camera this much fun to tinker with.</p>
+      </section>
+      
+    </main>
+    <footer class="site-footer">
+  <div class="site-footer__inner container">
+    <div class="site-footer__top">
+      <a href="/" class="footer-home" aria-label="codesthings.com home"><svg class="logo logo--wordmark" xmlns="http://www.w3.org/2000/svg" viewBox="-3.5 -6 552.2 92" width="144" height="24" aria-hidden="true" focusable="false"><g transform="translate(0 0) scale(1.25)"><path d="M44 8 V44 A9 9 0 0 0 53 53 H56" fill="none" class="logo__accent" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M34.61 46.61 A15 15 0 1 1 24 21 H56" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g><g transform="translate(106 4) scale(0.9)"><g fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path transform="translate(0 0)" d="M34.14 25.86 A20 20 0 0 0 20 20 H20 A20 20 0 0 0 0 40 V40 A20 20 0 0 0 20 60 H20 A20 20 0 0 0 34.14 54.14"/><path transform="translate(49 0)" d="M20 20 H20 A20 20 0 0 1 40 40 V40 A20 20 0 0 1 20 60 H20 A20 20 0 0 1 0 40 V40 A20 20 0 0 1 20 20 Z"/><path transform="translate(102 0)" d="M20 20 H20 A20 20 0 0 1 40 40 V40 A20 20 0 0 1 20 60 H20 A20 20 0 0 1 0 40 V40 A20 20 0 0 1 20 20 Z M40 0 V60"/><path transform="translate(155 0)" d="M0 40 H40 A20 20 0 0 0 20 20 H20 A20 20 0 0 0 0 40 V40 A20 20 0 0 0 20 60 H20 A20 20 0 0 0 34.14 54.14"/><path transform="translate(208 0)" d="M30 20 H10 A10 10 0 0 0 10 40 H20 A10 10 0 0 1 20 60 H0"/><path transform="translate(251 0)" d="M8 4 V50 A10 10 0 0 0 18 60 H24 M0 20 H22"/><path transform="translate(286 0)" d="M0 0 V60 M0 40 A20 20 0 0 1 20 20 H20 A20 20 0 0 1 40 40 V60"/><path transform="translate(339 0)" d="M0 20 V60"/><path transform="translate(352 0)" d="M0 20 V60 M0 40 A20 20 0 0 1 20 20 H20 A20 20 0 0 1 40 40 V60"/><path transform="translate(405 0)" d="M20 20 H20 A20 20 0 0 1 40 40 V40 A20 20 0 0 1 20 60 H20 A20 20 0 0 1 0 40 V40 A20 20 0 0 1 20 20 Z M40 20 V66 A14 14 0 0 1 26 80 H6"/><path transform="translate(458 0)" d="M30 20 H10 A10 10 0 0 0 10 40 H20 A10 10 0 0 1 20 60 H0"/></g><circle cx="339" cy="6" r="5.04" class="logo__dot"/></g></svg>
+</a>
+      <a href="/cv/" class="btn btn--primary"><svg
+  class="icon "
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" /><path d="M14 3v5h5" /><circle cx="9.5" cy="11" r="1.75" /><path d="M7 16c.4-1.3 1.3-2 2.5-2s2.1.7 2.5 2" /><path d="M14 11h2.5" /><path d="M14 14h2.5" /><path d="M7 18.5h9.5" /></svg>
+<span>View CV</span></a>
+    </div>
+    <nav aria-label="Footer">
+      <ul class="footer-links">
+        <li><a class="footer-link" href="/blog/">Blog</a></li>
+        <li><a class="footer-link" href="/feed.xml">RSS</a></li>
+        <li><a class="footer-link" href="/now">Now</a></li>
+        <li><a class="footer-link" href="/uses">Uses</a></li>
+        <li><a class="footer-link" href="/colophon">Colophon</a></li>
+        <li><a class="footer-link" href="/privacy-notice">Privacy Notice</a></li>
+        <li><a class="footer-link" href="/about-cookies">About Cookies</a></li>
+      </ul>
+    </nav>
+    <ul class="footer-social">
+      
+      <li>
+        <a class="footer-social__link" href="https://github.com/jamescodesthings" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)"><svg
+  class="icon "
+  width="20"
+  height="20"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" /><path d="M9 18c-4.51 2-5-2-7-2" /></svg>
+</a>
+      </li>
+      
+      <li>
+        <a class="footer-social__link" href="https://makerworld.com/en/@jamescodesthing" target="_blank" rel="noopener noreferrer" aria-label="Makerworld (opens in a new tab)"><svg
+  class="icon "
+  width="20"
+  height="20"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" /><path d="m3.3 7 8.7 5 8.7-5" /><path d="M12 22V12" /></svg>
+</a>
+      </li>
+      
+      <li>
+        <a class="footer-social__link" href="https://www.linkedin.com/in/jamescodesthings" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)"><svg
+  class="icon "
+  width="20"
+  height="20"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" /></svg>
+</a>
+      </li>
+      
+      <li>
+        <a class="footer-social__link" href="https://www.instagram.com/jamescodesthings/" target="_blank" rel="noopener noreferrer" aria-label="Instagram (opens in a new tab)"><svg
+  class="icon "
+  width="20"
+  height="20"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+><rect x="2" y="2" width="20" height="20" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><path d="M17.5 6.5h.01" /></svg>
+</a>
+      </li>
+      
+    </ul>
+    <p class="footer-meta">
+      <span>&copy; 2026 James Macmillan</span>
+      <a href="https://github.com/jamescodesthings/campsnap" rel="noopener">This page on GitHub</a>
+    </p>
+  </div>
+</footer>
+
+    <script type="application/json" id="filter-data">[{"name":"Golden '92","slug":"golden-92"},{"name":"Eternal Hour","slug":"eternal-hour"},{"name":"Street Cool","slug":"street-cool"},{"name":"Deep Separation","slug":"deep-separation"},{"name":"Vivid Landscape","slug":"vivid-landscape"},{"name":"Crimson Dusk","slug":"crimson-dusk"},{"name":"Neutral Transparency","slug":"neutral-transparency"},{"name":"Complexion Priority","slug":"complexion-priority"},{"name":"Pastel Shoulder","slug":"pastel-shoulder"},{"name":"Ceremonial Wash","slug":"ceremonial-wash"},{"name":"Drugstore Green","slug":"drugstore-green"},{"name":"Instant Bloom","slug":"instant-bloom"},{"name":"Pastel Memory","slug":"pastel-memory"},{"name":"Classic Dispo","slug":"classic-dispo"},{"name":"Crimson Register","slug":"crimson-register"},{"name":"Cool Lab Slip","slug":"cool-lab-slip"},{"name":"Riviera Cyanotype","slug":"riviera-cyanotype"},{"name":"Chromatic Storybook","slug":"chromatic-storybook"},{"name":"Isle of Ochre","slug":"isle-of-ochre"},{"name":"Moody B&W","slug":"moody-bw"},{"name":"Textured B&W","slug":"textured-bw"},{"name":"Charcoal Depth","slug":"charcoal-depth"},{"name":"Neutral","slug":"neutral"}]</script>
   </body>
 </html>

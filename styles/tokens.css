@@ -1,0 +1,182 @@
+/*
+ * Design tokens: palette, type, spacing. Shared set: the cv and campsnap sub-sites copy this file.
+ * Dark is the default (no attribute, or data-theme="dark"). Light is data-theme="light" on <html>.
+ */
+
+/*
+ * Three colour roles, as on the CV. --color-accent is small coloured text and marks: labels, numbers,
+ * the logo stroke, filled controls. --color-link is for links. --color-sun is light and never text:
+ * resting link underlines, drawn rules, hover marks and focus rings; --sun-mix is its strength when
+ * it is laid over the page. By day the sun is ink, so what it draws reads as a shadow.
+ */
+
+:root,
+:root[data-theme='dark'] {
+  /* Night: a moonlit page in cool blue-greys. */
+  color-scheme: dark;
+  --color-bg: #090b12;
+  --color-surface: #121521;
+  --color-surface-raised: #1a1e2d;
+  --color-border: #262b3d;
+  --color-heading: #f0ece4;
+  --color-text: #d4d8e2;
+  --color-muted: #9ca3af;
+  --color-accent: #a9bce0;
+  --weight-accent: 500;
+  --color-on-accent: #090b12;
+  --color-link: #c3d2ee;
+  --color-link-hover: #e6ecf7;
+  --color-sun: #e6ecf7;
+  --sun-mix: 85%;
+  --color-underline: color-mix(in srgb, var(--color-sun) var(--sun-mix), transparent);
+  --color-focus: var(--color-sun);
+  --color-status: #4ade80; /* availability dot; decorative, 3:1 or better on surface */
+
+  /* Syntax colours for code blocks; each is 4.5:1 or better on --color-surface. */
+  --code-text: var(--color-text);
+  --code-comment: var(--color-muted);
+  --code-keyword: var(--color-accent);
+  --code-punctuation: var(--color-muted);
+  --code-string: #8fd4a4;
+  --code-constant: #7fb7f0;
+  --code-function: #c4a7f0;
+}
+
+:root[data-theme='light'] {
+  /* Day: a sundial, warm paper and ink. The accent is bold ink. */
+  color-scheme: light;
+  --color-bg: #faf8f4;
+  --color-surface: #ffffff;
+  --color-surface-raised: #f5f3ee;
+  --color-border: #e5e2da;
+  --color-heading: #14161d;
+  --color-text: #22252e;
+  --color-muted: #5a5f6b;
+  --color-accent: #14161d;
+  --weight-accent: 700;
+  --color-on-accent: #faf8f4;
+  --color-link: #14161d;
+  --color-link-hover: #000000;
+  --color-sun: #14161d;
+  --sun-mix: 45%;
+  --color-underline: color-mix(in srgb, var(--color-sun) var(--sun-mix), transparent);
+  --color-focus: var(--color-sun);
+  --color-status: #1a7f37;
+
+  --code-text: var(--color-text);
+  --code-comment: var(--color-muted);
+  --code-keyword: var(--color-accent);
+  --code-punctuation: var(--color-muted);
+  --code-string: #1a6a36;
+  --code-constant: #1d5fa8;
+  --code-function: #6b3fa8;
+}
+
+/* Fonts: Latin variable woff2, self-hosted. Sources and licences in assets/fonts/. */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('../static/fonts/bricolage-grotesque-latin-wght-normal.woff2') format('woff2');
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Figtree';
+  src: url('../static/fonts/figtree-latin-wght-normal.woff2') format('woff2');
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('../static/fonts/geist-mono-latin-wght-normal.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Metric-matched fallbacks keep layout shift at zero while the real faces load. */
+@font-face {
+  font-family: 'Bricolage Fallback';
+  src: local('Arial'), local('Liberation Sans'), local('Arimo');
+  size-adjust: 113.2%;
+  ascent-override: 82.2%;
+  descent-override: 23.9%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Figtree Fallback';
+  src: local('Arial'), local('Liberation Sans'), local('Arimo');
+  size-adjust: 100.5%;
+  ascent-override: 94.5%;
+  descent-override: 24.9%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Geist Mono Fallback';
+  src: local('Courier New'), local('Liberation Mono'), local('Cousine');
+  size-adjust: 100%;
+  ascent-override: 100.5%;
+  descent-override: 29.5%;
+  line-gap-override: 0%;
+}
+
+:root {
+  --font-heading: 'Bricolage Grotesque', 'Bricolage Fallback', system-ui, sans-serif;
+  --font-body: 'Figtree', 'Figtree Fallback', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* Type scale: fixed rem, one step-up at 768px. No vw middles. */
+  --text-display: 2.5rem;
+  --text-h1: 2rem;
+  --text-h2: 1.5rem;
+  --text-h3: 1.25rem;
+  --text-h4: 1.0625rem;
+  --text-body: 1.0625rem;
+  --text-small: 0.9375rem;
+  --text-xs: 0.8125rem;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+  --space-5xl: 8rem;
+
+  /* Layout */
+  --max-width: 1100px;
+  --gutter: 1.25rem;
+  --header-height: 3.5rem;
+  --radius-sm: 6px;
+  --radius: 8px;
+  --radius-lg: 12px;
+
+  /* Motion, as on the CV. Everything that loops is the same sun crossing the sky: one day takes
+     --day, or --day-hover on the button under the pointer. --dusk is the theme change. */
+  --day: 16s;
+  --day-hover: 6s;
+  --dusk: 0.9s;
+  --ease-sun: cubic-bezier(0.37, 0, 0.63, 1);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --text-display: 3.75rem;
+    --text-h1: 2.5rem;
+    --text-h2: 1.875rem;
+    --text-h3: 1.5rem;
+    --text-h4: 1.25rem;
+    --text-body: 1.125rem;
+    --text-small: 1rem;
+    --text-xs: 0.875rem;
+    --gutter: 2rem;
+  }
+}
