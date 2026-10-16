@@ -23,6 +23,16 @@ function readFilters(doc) {
   }
 }
 
+// A malformed hash (a stray %) must never stop the page's script.
+function decodeHash(hash) {
+  const raw = hash.slice(1);
+  try {
+    return decodeURIComponent(raw);
+  } catch (e) {
+    return raw;
+  }
+}
+
 function el(doc, tag, attrs = {}, ...children) {
   const node = doc.createElement(tag);
   for (const [key, value] of Object.entries(attrs)) {
@@ -176,7 +186,10 @@ export function initTracker(win = window) {
       sync();
     }
     link.addEventListener('click', () => {
-      const slot = slotById(select ? select.value : 'std');
+      // Without a picker, the link's own download name says which slot it fills.
+      const slot = select
+        ? slotById(select.value)
+        : SLOTS.find(s => s.file === link.getAttribute('download'));
       if (!slot || !state.autoUpdate) return;
       state = recordDownload(state, slot.id, link.dataset.name || link.dataset.filter);
       save();
@@ -190,7 +203,7 @@ export function initTracker(win = window) {
     render();
     card.hidden = false;
     // Showing the card pushes everything below it down, so a link to #<filter> would land short of it.
-    const target = win.location.hash && doc.getElementById(decodeURIComponent(win.location.hash.slice(1)));
+    const target = win.location.hash && doc.getElementById(decodeHash(win.location.hash));
     if (target && card.compareDocumentPosition(target) & win.Node.DOCUMENT_POSITION_FOLLOWING) {
       target.scrollIntoView({ behavior: 'instant' });
     }
