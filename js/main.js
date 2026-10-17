@@ -1,34 +1,21 @@
 import { initTheme } from './theme.js';
 import { initTracker } from './tracker.js';
+import { initArchive, DESK } from './archive.js';
 
 initTheme();
 initTracker();
+initArchive();
 
-// A preview strip scrolls sideways only on narrow screens. There it becomes a labelled, focusable region so a
-// keyboard can scroll it; where it fits, it stays out of the tab order. Touch scrolling needs none of this.
-const strips = [...document.querySelectorAll('.strip')];
-function syncStrips() {
-  for (const strip of strips) {
-    if (strip.scrollWidth > strip.clientWidth + 1) {
-      strip.setAttribute('tabindex', '0');
-      strip.setAttribute('role', 'region');
-      strip.setAttribute('aria-label', strip.dataset.label || 'Sample shots, scrolls sideways');
-    } else {
-      strip.removeAttribute('tabindex');
-      strip.removeAttribute('role');
-      strip.removeAttribute('aria-label');
-    }
-  }
-}
-if (strips.length) {
-  syncStrips();
-  let frame = 0;
-  window.addEventListener('resize', () => {
-    cancelAnimationFrame(frame);
-    frame = requestAnimationFrame(syncStrips);
-  });
-  // Images are lazy, but width and height are set, so the layout is final before they load; this is a backstop.
-  window.addEventListener('load', syncStrips);
+// The hero's two crops show different bands (5 on the stack, 8 on the desk), so its alt follows the crop on show.
+const heroImg = document.querySelector('.hero__img[data-desk-alt]');
+if (heroImg) {
+  const stackAlt = heroImg.alt;
+  const deskQuery = window.matchMedia(DESK);
+  const syncAlt = () => {
+    heroImg.alt = deskQuery.matches ? heroImg.dataset.deskAlt : stackAlt;
+  };
+  syncAlt();
+  deskQuery.addEventListener('change', syncAlt);
 }
 
 // Phone nav collapses into a <details> menu; from 768px it sits inline. As base-website src/js/main.js.

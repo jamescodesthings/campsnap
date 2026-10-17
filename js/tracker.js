@@ -1,217 +1,432 @@
-// Filter tracker and slot downloads: the DOM side of tracker-core.js. The card ships hidden and is shown here, so a
-// visitor without JavaScript never sees a dead control; their download links still save as the default slot name.
+// The filter tracker: the DOM side of tracker-core.js (design review 2.7). It records slot downloads and runs the
+// "What's loaded" button and dialog, cloned from pages.ejs's #tracker-template into the header's .tracker-anchor.
+// Without JavaScript there is no button, and every download link still saves under the name in its download attribute.
 import { createStorage } from './storage.js';
 import {
   STORAGE_KEY,
   SLOTS,
   parseState,
   serialiseState,
+  recordDownload,
   setSlot,
   setAutoUpdate,
-  recordDownload,
   findFilter,
+  serialiseSlotsFile,
+  parseSlotsFile,
 } from './tracker-core.js';
 
-const slotById = id => SLOTS.find(s => s.id === id);
+const DESK = '(orientation: landscape) and (min-width: 900px) and (min-height: 560px)';
+const MAX_FILE_BYTES = 16 * 1024;
+const NOT_A_SLOTS_FILE = "That doesn't look like a slots file. Nothing changed.";
+const NO_SLOT_LINES = 'No slot lines found in that file. Nothing changed.';
 
-function readFilters(doc) {
-  try {
-    const data = JSON.parse(doc.getElementById('filter-data')?.textContent || '[]');
-    return Array.isArray(data) ? data : [];
-  } catch (e) {
-    return [];
-  }
-}
+const plural = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`;
 
-// A malformed hash (a stray %) must never stop the page's script.
-function decodeHash(hash) {
-  const raw = hash.slice(1);
-  try {
-    return decodeURIComponent(raw);
-  } catch (e) {
-    return raw;
-  }
-}
-
-function el(doc, tag, attrs = {}, ...children) {
-  const node = doc.createElement(tag);
-  for (const [key, value] of Object.entries(attrs)) {
-    if (key === 'text') node.textContent = value;
-    else node.setAttribute(key, value);
-  }
-  for (const child of children) if (child) node.append(child);
-  return node;
+export function importedMessage(count, ignored) {
+  const lead = `Imported ${plural(count, 'slot')}.`;
+  return ignored ? `${lead} Ignored ${plural(ignored, 'line')} it didn't recognise.` : lead;
 }
 
 export function initTracker(win = window) {
   const doc = win.document;
-  const card = doc.getElementById('tracker');
-  const rows = doc.getElementById('tracker-rows');
-  const auto = doc.getElementById('tracker-auto');
-  const status = doc.getElementById('tracker-status');
-  const filters = readFilters(doc);
   // Storage that throws (Safari private mode) leaves state in memory for the session.
   const store = createStorage(win);
   let state = parseState(store.get(STORAGE_KEY));
-  let editing = null;
+  let ui = null;
+  // Blocked when localStorage can't be reached at all, or once a write fails (quota, private mode). From then on
+  // the slots live only in memory, and the dialog says so.
+  let storageBlocked = false;
+  try {
+    win.localStorage.getItem(STORAGE_KEY);
+  } catch {
+    storageBlocked = true;
+  }
 
-  const save = () => store.set(STORAGE_KEY, serialiseState(state));
-  const announce = text => {
-    if (status) status.textContent = text;
+  // Another tab may have changed the slots since this page loaded. Not while blocked: storage then holds an older
+  // copy (or nothing) and would overwrite what's in memory.
+  const reload = () => {
+    if (storageBlocked) return;
+    const saved = store.get(STORAGE_KEY);
+    if (saved !== null) state = parseState(saved);
+  };
+  const save = () => {
+    if (storageBlocked) return;
+    if (!store.set(STORAGE_KEY, serialiseState(state))) storageBlocked = true;
   };
 
-  function valueNode(slot) {
-    const name = state.slots[slot.id];
-    if (!name) return el(doc, 'span', { class: 'tracker-row__empty', text: 'Not set' });
-    const match = findFilter(filters, name);
-    if (!match) return el(doc, 'span', { class: 'tracker-row__name', text: name });
-    return el(doc, 'a', { class: 'tracker-row__name', href: `#${match.slug}`, text: match.name });
-  }
-
-  function editButton(slot) {
-    const btn = el(doc, 'button', {
-      type: 'button',
-      class: 'tracker-row__edit',
-      'data-edit': slot.id,
-      'aria-label': `Edit ${slot.label} slot`,
-    });
-    btn.innerHTML =
-      '<svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 20h9" /><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z" /></svg><span>Edit</span>';
-    btn.addEventListener('click', () => {
-      editing = slot.id;
-      render();
-      const input = rows.querySelector('.tracker-row__input');
-      if (input) {
-        input.focus();
-        input.select();
-      }
-    });
-    return btn;
-  }
-
-  function editor(slot) {
-    const inputId = `tracker-input-${slot.id}`;
-    const input = el(doc, 'input', {
-      id: inputId,
-      class: 'tracker-row__input',
-      type: 'text',
-      list: 'tracker-filters',
-      autocomplete: 'off',
-      maxlength: '80',
-      'aria-label': `Filter on the ${slot.label} slot`,
-      placeholder: 'Filter name',
-    });
-    input.value = state.slots[slot.id];
-    const form = el(
-      doc,
-      'form',
-      { class: 'tracker-row__editor' },
-      input,
-      el(doc, 'button', { type: 'submit', class: 'btn btn--primary btn--small', text: 'Save' }),
-      el(doc, 'button', { type: 'button', class: 'btn btn--secondary btn--small', 'data-cancel': '', text: 'Cancel' }),
-    );
-    // Enter submits the form; an empty value clears the slot.
-    form.addEventListener('submit', event => {
-      event.preventDefault();
-      state = setSlot(state, slot.id, input.value);
-      save();
-      announce(state.slots[slot.id] ? `${slot.label} slot set to ${state.slots[slot.id]}.` : `${slot.label} slot cleared.`);
-      close(slot.id);
-    });
-    form.querySelector('[data-cancel]').addEventListener('click', () => close(slot.id));
-    form.addEventListener('keydown', event => {
-      if (event.key === 'Escape') {
-        event.preventDefault();
-        close(slot.id);
-      }
-    });
-    return form;
-  }
-
-  function close(slotId) {
-    editing = null;
-    render();
-    rows.querySelector(`[data-edit="${slotId}"]`)?.focus();
-  }
-
-  function render() {
-    if (!rows) return;
-    rows.replaceChildren(
-      ...SLOTS.map(slot => {
-        const head = el(
-          doc,
-          'span',
-          { class: 'tracker-row__slot' },
-          el(doc, 'span', { class: 'tracker-row__label', text: slot.label }),
-          el(doc, 'code', { class: 'tracker-row__file', text: slot.file }),
-        );
-        const body =
-          editing === slot.id
-            ? editor(slot)
-            : el(doc, 'span', { class: 'tracker-row__value' }, valueNode(slot), editButton(slot));
-        return el(doc, 'li', { class: 'tracker-row', 'data-slot': slot.id }, head, body);
-      }),
-    );
-    if (auto) auto.checked = state.autoUpdate;
-  }
-
-  if (auto) {
-    auto.addEventListener('change', () => {
-      state = setAutoUpdate(state, auto.checked);
-      save();
-    });
-    // The tooltip shows on hover and focus; Escape hides it until the pointer or focus leaves.
-    const wrap = auto.closest('.switch');
-    auto.addEventListener('keydown', event => {
-      if (event.key === 'Escape') wrap?.setAttribute('data-tip-dismissed', '');
-    });
-    const reset = () => wrap?.removeAttribute('data-tip-dismissed');
-    auto.addEventListener('blur', reset);
-    wrap?.addEventListener('mouseleave', reset);
-  }
-
-  // Each filter's slot picker renames its download; a click with Auto-update on records the slot.
-  doc.querySelectorAll('a[data-filter]').forEach(link => {
-    const select = link.closest('section')?.querySelector('select[data-slot-select]');
-    const label = link.querySelector('[data-download-label]');
-    const sync = () => {
-      const slot = slotById(select.value);
-      if (!slot) return;
-      link.setAttribute('download', slot.file);
-      if (label) label.textContent = `Download as ${slot.file}`;
-    };
-    if (select) {
-      select.addEventListener('change', sync);
-      // A restored form (back button) may already hold another slot.
-      sync();
-    }
-    link.addEventListener('click', () => {
-      // Without a picker, the link's own download name says which slot it fills.
-      const slot = select
-        ? slotById(select.value)
-        : SLOTS.find(s => s.file === link.getAttribute('download'));
-      if (!slot || !state.autoUpdate) return;
-      state = recordDownload(state, slot.id, link.dataset.name || link.dataset.filter);
-      save();
-      if (editing === slot.id) editing = null;
-      render();
-      announce(`${slot.label} slot set to ${state.slots[slot.id]}.`);
-    });
+  // A slot button records its filter on that slot when Auto-update is on. The name-save link
+  // (a[data-namesave]) implies no slot, so it never records.
+  doc.addEventListener('click', event => {
+    const link = event.target.closest?.('a[data-filter][data-slot]');
+    if (!link) return;
+    const slot = SLOTS.find(s => s.id === link.dataset.slot);
+    if (!slot) return;
+    reload();
+    if (!state.autoUpdate) return;
+    state = recordDownload(state, slot.id, link.dataset.name || link.dataset.filter);
+    save();
+    ui?.render();
+    win.dispatchEvent(new win.CustomEvent('campsnap:slots', { detail: { slot: slot.id, name: state.slots[slot.id] } }));
   });
 
-  if (card) {
-    render();
-    card.hidden = false;
-    // Showing the card pushes everything below it down, so a link to #<filter> would land short of it.
-    const target = win.location.hash && doc.getElementById(decodeHash(win.location.hash));
-    if (target && card.compareDocumentPosition(target) & win.Node.DOCUMENT_POSITION_FOLLOWING) {
-      target.scrollIntoView({ behavior: 'instant' });
-    }
-  }
+  ui = mountUi(win, {
+    get: () => state,
+    blocked: () => storageBlocked,
+    update(change) {
+      reload();
+      state = change(state);
+      save();
+    },
+    reload,
+  });
+
+  win.addEventListener('storage', event => {
+    if (event.key !== STORAGE_KEY) return;
+    reload();
+    ui?.render();
+  });
 
   return {
     get state() {
       return state;
     },
   };
+}
+
+function mountUi(win, store) {
+  const doc = win.document;
+  const template = doc.getElementById('tracker-template');
+  const anchor = doc.querySelector('.tracker-anchor');
+  if (!template || !anchor || typeof template.content === 'undefined') return null;
+  anchor.append(template.content.cloneNode(true));
+
+  const button = anchor.querySelector('.tracker-button');
+  const dialog = anchor.querySelector('#tracker-dialog');
+  if (!button || !dialog || typeof dialog.showModal !== 'function') {
+    anchor.replaceChildren();
+    return null;
+  }
+
+  let filters = [];
+  try {
+    filters = JSON.parse(doc.getElementById('filter-data')?.textContent || '[]');
+  } catch {
+    filters = [];
+  }
+
+  const $ = sel => dialog.querySelector(sel);
+  const views = { main: $('[data-tracker-view="main"]'), settings: $('[data-tracker-view="settings"]') };
+  const title = $('#tracker-title');
+  const dot = button.querySelector('.tracker-button__dot');
+  const auto = $('[data-tracker-auto]');
+  const statusLine = $('[data-tracker-status]');
+  const settingsButton = $('[data-tracker-settings]');
+  const backButton = $('[data-tracker-back]');
+  const actions = $('[data-tracker-actions]');
+  const fileInput = $('[data-tracker-file]');
+  const importButton = $('[data-tracker-import]');
+  const clearButton = $('[data-tracker-clear]');
+  const confirm = $('[data-tracker-confirm]');
+  const preview = $('[data-tracker-preview]');
+  const blockedLine = $('[data-tracker-blocked]');
+  const rows = Object.fromEntries(SLOTS.map(s => [s.id, $(`[data-tracker-slot="${s.id}"]`)]));
+  const desk = win.matchMedia(DESK);
+
+  let editing = null;
+  let pending = null;
+  // Set when a filter link in the dialog closes it: focus then goes to that filter, not back to the button.
+  let followed = null;
+
+  function status(message) {
+    statusLine.textContent = message;
+  }
+
+  function render() {
+    const { slots, autoUpdate } = store.get();
+    const count = SLOTS.filter(s => slots[s.id]).length;
+    button.setAttribute('aria-label', `Filter tracker, ${count} of 4 slots set`);
+    dot.hidden = count === 0;
+    auto.checked = autoUpdate;
+    blockedLine.hidden = !store.blocked();
+    for (const s of SLOTS) {
+      const value = rows[s.id].querySelector('[data-tracker-value]');
+      const name = slots[s.id];
+      const filter = name ? findFilter(filters, name) : null;
+      let node;
+      if (filter) {
+        node = doc.createElement('a');
+        node.href = `#${filter.slug}`;
+        node.dataset.trackerLink = '';
+      } else {
+        node = doc.createElement('span');
+        if (!name) node.className = 'tracker__empty';
+      }
+      node.textContent = name || 'Empty';
+      value.replaceChildren(node);
+    }
+  }
+
+  function showView(name) {
+    for (const [key, view] of Object.entries(views)) view.hidden = key !== name;
+  }
+
+  function endEdit(focus) {
+    if (!editing) return;
+    const row = rows[editing];
+    editing = null;
+    row.querySelector('[data-tracker-form]').hidden = true;
+    row.querySelector('[data-tracker-value]').hidden = false;
+    row.querySelector('[data-tracker-edit]').hidden = false;
+    if (focus) row.querySelector('[data-tracker-edit]').focus();
+  }
+
+  function startEdit(id) {
+    endEdit(false);
+    editing = id;
+    const row = rows[id];
+    const input = row.querySelector('input');
+    row.querySelector('[data-tracker-value]').hidden = true;
+    row.querySelector('[data-tracker-edit]').hidden = true;
+    row.querySelector('[data-tracker-form]').hidden = false;
+    input.value = store.get().slots[id];
+    input.focus();
+    input.select();
+  }
+
+  function hideConfirm() {
+    confirm.hidden = true;
+    clearButton.hidden = false;
+  }
+
+  function hidePreview() {
+    pending = null;
+    preview.hidden = true;
+    actions.hidden = false;
+  }
+
+  function reset() {
+    endEdit(false);
+    hideConfirm();
+    hidePreview();
+    showView('main');
+    status('');
+  }
+
+  // The desk gets a non-modal popover under the button; the stack gets a full-screen modal sheet.
+  function present() {
+    if (desk.matches) dialog.show();
+    else dialog.showModal();
+    button.setAttribute('aria-expanded', 'true');
+  }
+
+  function open() {
+    if (dialog.open) return;
+    store.reload();
+    reset();
+    render();
+    present();
+    title.focus();
+  }
+
+  function close() {
+    if (dialog.open) dialog.close();
+  }
+
+  dialog.addEventListener('close', () => {
+    // The close event is queued: after a layout swap the dialog is already open again.
+    if (dialog.open) return;
+    endEdit(false);
+    button.setAttribute('aria-expanded', 'false');
+    if (followed) {
+      // Let the hash change (and the desk archive) show the filter first, then put focus on its heading.
+      const heading = doc.getElementById(`${followed}-title`);
+      followed = null;
+      if (heading) {
+        win.setTimeout(() => {
+          if (!heading.hasAttribute('tabindex')) heading.setAttribute('tabindex', '-1');
+          heading.focus({ preventScroll: true });
+        }, 50);
+        return;
+      }
+    }
+    const active = doc.activeElement;
+    // Back to the button, unless an outside click already put focus on something else.
+    if (!active || active === doc.body || dialog.contains(active)) button.focus({ preventScroll: true });
+  });
+
+  button.addEventListener('click', () => (dialog.open ? close() : open()));
+
+  // Rotating between the layouts swaps a popover for a sheet (or back) without losing the view.
+  desk.addEventListener('change', () => {
+    if (!dialog.open) return;
+    dialog.close();
+    present();
+    if (editing) rows[editing].querySelector('input').focus();
+    else title.focus();
+  });
+
+  // Esc: leave an edit, the Clear all confirmation or an import preview first; a second Esc closes.
+  function onEscape(event) {
+    if (editing) {
+      endEdit(true);
+    } else if (!confirm.hidden) {
+      hideConfirm();
+      clearButton.focus();
+    } else if (pending) {
+      hidePreview();
+      importButton.focus();
+      status('Nothing changed.');
+    } else {
+      return false;
+    }
+    event.preventDefault();
+    return true;
+  }
+
+  dialog.addEventListener('cancel', event => {
+    onEscape(event);
+  });
+
+  doc.addEventListener('keydown', event => {
+    if (event.key !== 'Escape' || !dialog.open) return;
+    if (onEscape(event)) {
+      event.stopPropagation();
+      return;
+    }
+    if (!dialog.matches(':modal')) {
+      event.preventDefault();
+      close();
+    }
+  });
+
+  // A click outside the popover closes it (the sheet covers the page, so there is no outside).
+  doc.addEventListener('click', event => {
+    if (!dialog.open || dialog.matches(':modal')) return;
+    if (dialog.contains(event.target) || button.contains(event.target)) return;
+    close();
+  });
+
+  dialog.addEventListener('click', event => {
+    const target = event.target.closest('button, a');
+    if (!target) return;
+    if (target.matches('[data-tracker-close]')) close();
+    else if (target.matches('[data-tracker-link]')) {
+      followed = target.getAttribute('href').slice(1);
+      close();
+    }
+    else if (target.matches('[data-tracker-edit]')) startEdit(target.closest('[data-tracker-slot]').dataset.trackerSlot);
+    else if (target.matches('[data-tracker-cancel]')) endEdit(true);
+    else if (target === settingsButton) {
+      endEdit(false);
+      status('');
+      showView('settings');
+      backButton.focus();
+    } else if (target === backButton) {
+      hideConfirm();
+      hidePreview();
+      status('');
+      showView('main');
+      settingsButton.focus();
+    } else if (target.matches('[data-tracker-export]')) exportFile();
+    else if (target === importButton) fileInput.click();
+    else if (target === clearButton) {
+      clearButton.hidden = true;
+      confirm.hidden = false;
+      confirm.querySelector('[data-tracker-clear-no]').focus();
+    } else if (target.matches('[data-tracker-clear-no]')) {
+      hideConfirm();
+      clearButton.focus();
+    } else if (target.matches('[data-tracker-clear-yes]')) {
+      store.update(s => SLOTS.reduce((acc, slot) => setSlot(acc, slot.id, ''), s));
+      hideConfirm();
+      render();
+      clearButton.focus();
+      status('Cleared all four slots.');
+    } else if (target.matches('[data-tracker-replace]')) replace();
+    else if (target.matches('[data-tracker-import-cancel]')) {
+      hidePreview();
+      importButton.focus();
+      status('Nothing changed.');
+    }
+  });
+
+  dialog.addEventListener('submit', event => {
+    const form = event.target.closest('[data-tracker-form]');
+    if (!form) return;
+    event.preventDefault();
+    const id = form.closest('[data-tracker-slot]').dataset.trackerSlot;
+    const value = form.querySelector('input').value;
+    store.update(s => setSlot(s, id, value));
+    render();
+    endEdit(true);
+  });
+
+  auto.addEventListener('change', () => {
+    store.update(s => setAutoUpdate(s, auto.checked));
+    render();
+  });
+
+  function exportFile() {
+    const blob = new Blob([serialiseSlotsFile(store.get(), new Date())], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = doc.createElement('a');
+    link.href = url;
+    link.download = 'campsnap-slots.txt';
+    link.hidden = true;
+    dialog.append(link);
+    link.click();
+    link.remove();
+    // Some browsers start the download after the click returns; give them time before the URL goes.
+    win.setTimeout(() => URL.revokeObjectURL(url), 15000);
+    status('Exported campsnap-slots.txt.');
+  }
+
+  fileInput.addEventListener('change', async () => {
+    const file = fileInput.files && fileInput.files[0];
+    fileInput.value = '';
+    if (!file) return;
+    hidePreview();
+    // Size first: a big file is never read.
+    if (file.size > MAX_FILE_BYTES) {
+      status(NOT_A_SLOTS_FILE);
+      return;
+    }
+    let text;
+    try {
+      text = await file.text();
+    } catch {
+      status(NOT_A_SLOTS_FILE);
+      return;
+    }
+    const result = parseSlotsFile(text);
+    if (!result.ok) {
+      status(result.reason === 'no-slots' ? NO_SLOT_LINES : NOT_A_SLOTS_FILE);
+      return;
+    }
+    pending = result;
+    for (const s of SLOTS) {
+      const cell = preview.querySelector(`[data-tracker-preview-slot="${s.id}"] .tracker__preview-value`);
+      const has = Object.hasOwn(result.slots, s.id);
+      cell.textContent = has ? result.slots[s.id] || 'Empty' : 'No change';
+      cell.classList.toggle('tracker__empty', !has || !result.slots[s.id]);
+    }
+    status('');
+    actions.hidden = true;
+    preview.hidden = false;
+    preview.querySelector('.tracker__preview-title').focus();
+  });
+
+  function replace() {
+    if (!pending) return;
+    const { slots, ignored } = pending;
+    store.update(s => Object.entries(slots).reduce((acc, [id, name]) => setSlot(acc, id, name), s));
+    hidePreview();
+    render();
+    showView('main');
+    title.focus();
+    status(importedMessage(Object.keys(slots).length, ignored));
+  }
+
+  render();
+  return { render, status };
 }

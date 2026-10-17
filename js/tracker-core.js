@@ -73,3 +73,60 @@ export function findFilter(filters, name) {
     ) || null
   );
 }
+
+// Slots file: plain text, "campsnap-slots.txt". Export and import rules are
+// in the round 2 design review, section 2.7.
+
+const MAX_FILE_BYTES = 16 * 1024;
+const MAX_FILE_VALUE = 60;
+const MONTHS = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December',
+];
+const SLOT_LINE = /^\s*(std|vtg1|vtg2|bw)(\.flt)?\s*[=:]\s*(.*?)\s*$/i;
+
+// Control characters (tabs and line breaks included) go; the rest is trimmed and capped.
+function cleanFileValue(value) {
+  if (typeof value !== 'string') return '';
+  return value
+    .replace(/[\u0000-\u001f\u007f-\u009f]/g, '')
+    .trim()
+    .slice(0, MAX_FILE_VALUE)
+    .trim();
+}
+
+export function serialiseSlotsFile(state, date = new Date()) {
+  const stamp = `${date.getDate()} ${MONTHS[date.getMonth()]} ${date.getFullYear()}`;
+  const lines = [
+    '# CampSnap Pro filter slots',
+    `# From codesthings.com/campsnap, exported ${stamp}`,
+    '# One line per slot: slot = filter name. Edit freely.',
+    '',
+  ];
+  for (const s of SLOTS) {
+    const name = cleanFileValue(state?.slots?.[s.id]);
+    lines.push(name ? `${s.id.padEnd(4)} = ${name}` : `${s.id} =`);
+  }
+  return lines.join('\n') + '\n';
+}
+
+export function parseSlotsFile(text) {
+  if (typeof text !== 'string') return { ok: false, reason: 'not-text' };
+  if (new TextEncoder().encode(text).length > MAX_FILE_BYTES) return { ok: false, reason: 'too-big' };
+  if (text.includes('\u0000') || text.includes('�')) return { ok: false, reason: 'not-text' };
+  const lines = text.replace(/^﻿/, '').split(/\r\n|\r|\n/);
+  const slots = {};
+  let ignored = 0;
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) continue;
+    const m = SLOT_LINE.exec(line);
+    if (!m) {
+      ignored += 1;
+      continue;
+    }
+    slots[m[1].toLowerCase()] = cleanFileValue(m[3]);
+  }
+  if (Object.keys(slots).length === 0) return { ok: false, reason: 'no-slots' };
+  return { ok: true, slots, ignored };
+}
