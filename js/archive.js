@@ -289,9 +289,29 @@ export function initArchive(win = window) {
     if (to < 0 || to >= panels.length) return;
     event.preventDefault();
     const fromTab = event.target.closest?.('.index__link');
+    const fromPanel = !fromTab && panels[active].contains(event.target) ? event.target : null;
     select(to);
     if (fromTab) tabs[to].focus();
+    // Focus was on a control in the panel that just hid: move it to the same control in the new one, or its heading.
+    else if (fromPanel) sameControlIn(panels[to], fromPanel).focus({ preventScroll: true });
   });
+
+  function sameControlIn(panel, el) {
+    let selector = null;
+    if (el.matches('a[data-slot]')) selector = `a[data-slot="${el.dataset.slot}"]`;
+    else if (el.matches('a[data-namesave]')) selector = 'a[data-namesave]';
+    else if (el.matches('a[data-step]')) selector = `a[data-step="${el.dataset.step}"]`;
+    else if (el.matches('a.frame')) selector = 'a.frame.is-current';
+    else if (el.matches('summary')) {
+      const kind = ['notes', 'help', 'inspo'].find(c => el.parentElement?.classList.contains(c));
+      if (kind) selector = `details.${kind} > summary`;
+    } else if (el.matches('.install-link')) selector = '.install-link';
+    const match = selector && panel.querySelector(selector);
+    if (match && match.getClientRects().length) return match;
+    const heading = panel.querySelector('.filter__name');
+    if (!heading.hasAttribute('tabindex')) heading.setAttribute('tabindex', '-1');
+    return heading;
+  }
 
   // Previous and Next: anchors without the script, a flip with it. Focus follows to the same control.
   stage.addEventListener('click', event => {

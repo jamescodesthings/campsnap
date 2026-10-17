@@ -1607,8 +1607,36 @@ html {
   gap: var(--space-md);
 }
 
+/* The tracker button floats at the top right, where each unit's head sits when it is snapped under the header:
+   keep the name and the Index link clear of it. The desk does this below by starting the column lower. */
+:root[data-js] .filter__head {
+  padding-right: calc(var(--tracker-size) + var(--space-sm));
+}
+
+/* Under 380px the Index link drops its word (still its accessible name) to keep that room. */
+@media (max-width: 379px) {
+  :root[data-js] .filter__head {
+    gap: var(--space-sm);
+  }
+
+  :root[data-js] .filter__to-index {
+    justify-content: center;
+    min-width: 44px;
+  }
+
+  :root[data-js] .filter__to-index span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
 .filter__name {
-  font-size: var(--text-h1);
+  /* 8vw on small phones, so the longest word ("Transparency") still fits beside Index and the tracker button. */
+  font-size: min(var(--text-h1), 8vw);
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -0.025em;
@@ -2344,6 +2372,15 @@ html {
 
   .filter__details > * {
     flex: none;
+  }
+
+  /* The head starts under the tracker button rather than beside it, so a long name keeps the column's width. */
+  :root[data-js] .filter__head {
+    padding-right: 0;
+  }
+
+  :root[data-js] .filter__details {
+    padding-top: calc(var(--tracker-top) - var(--header-h) + var(--tracker-size) + var(--space-sm));
   }
 
   .filter__to-index {
