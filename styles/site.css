@@ -1284,8 +1284,7 @@ html {
   color: var(--color-accent);
 }
 
-.hero__download,
-.hero__reach {
+.hero__download {
   order: 2;
 }
 
@@ -1311,12 +1310,6 @@ html {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   color: var(--color-muted);
-}
-
-.hero__reach {
-  margin-top: var(--space-md);
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
 }
 
 /* How it works -------------------------------------------------------------------------------- */
@@ -1914,12 +1907,6 @@ html {
   margin-top: var(--space-md);
 }
 
-.wild__stat {
-  font-family: var(--font-mono);
-  font-size: var(--text-small);
-  color: var(--color-accent);
-}
-
 .quotes {
   display: grid;
   gap: var(--space-xl);
@@ -1937,6 +1924,14 @@ html {
   margin-top: var(--space-sm);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
+  color: var(--color-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.quote__by span {
+  display: inline-flex;
 }
 
 .wild__more > summary {
