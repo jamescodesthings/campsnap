@@ -1392,21 +1392,30 @@ html {
   min-height: 44px;
 }
 
-/* The camera, as a line drawing: the dial's four positions called out to their files. */
+/* The camera as a blueprint: front over top, the filter dial pulled out and its positions called out to their files.
+   --color-annotation is used only here, for what the drawing is not: the marker ring, the wedge and the leaders. */
+:root,
+:root[data-theme='dark'] {
+  --color-annotation: #7fc4d6;
+}
+
+:root[data-theme='light'] {
+  --color-annotation: #1b6b80;
+}
+
 .camera {
   width: 100%;
-  max-width: 26rem;
+  max-width: 28rem;
   color: var(--color-heading);
 }
 
 .camera__frame {
   position: relative;
-  aspect-ratio: 180 / 72;
+  aspect-ratio: 300 / 126;
   container-type: inline-size;
 }
 
-.camera__drawing,
-.camera__photo {
+.camera__drawing {
   position: absolute;
   inset: 0;
   display: block;
@@ -1415,13 +1424,49 @@ html {
   overflow: visible;
 }
 
-.camera__photo {
-  width: 66.67%;
-  object-fit: cover;
+.camera__annotation {
+  stroke: var(--color-annotation);
 }
 
-.camera__leader {
-  stroke: var(--color-underline);
+.camera__wedge {
+  fill: var(--color-annotation);
+  fill-opacity: 0.08;
+}
+
+.camera__dot {
+  fill: var(--color-annotation);
+}
+
+/* The dial face: labels run from the centre outward, so they are SVG text and scale with the drawing. */
+.camera__face {
+  font-family: var(--font-mono);
+  font-size: 6px;
+  font-weight: var(--weight-accent);
+  fill: currentColor;
+  stroke: none;
+  dominant-baseline: middle;
+}
+
+.camera__face--off {
+  font-weight: 400;
+  fill: var(--color-muted);
+}
+
+.camera__view,
+.camera__callout {
+  position: absolute;
+  font-family: var(--font-mono);
+  /* These hang in the drawing's own grid; on a 320px phone they shrink with the frame so they stay on screen. */
+  font-size: min(var(--text-xs), 3.6cqi);
+  line-height: 1;
+  white-space: nowrap;
+  transform: translateY(-50%);
+}
+
+.camera__view {
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
 }
 
 .camera__callouts {
@@ -1429,16 +1474,9 @@ html {
 }
 
 .camera__callout {
-  position: absolute;
   display: flex;
   align-items: baseline;
   gap: 0.35em;
-  font-family: var(--font-mono);
-  /* The labels hang past the drawing into the gutter; on a 320px phone they shrink with the frame so they stay on screen. */
-  font-size: min(var(--text-xs), 4.2cqi);
-  line-height: 1;
-  white-space: nowrap;
-  transform: translateY(-50%);
 }
 
 .camera__mode {

@@ -237,50 +237,99 @@
         </div>
         <figure class="camera">
   <div class="camera__frame">
-    
-    <svg class="camera__drawing" viewBox="0 0 180 72" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-      
-      <rect x="4" y="14" width="112" height="54" rx="8" />
-      <path d="M12 14v-3h96v3" />
-      <rect x="88" y="6" width="14" height="5" rx="2" />
-      <rect x="12" y="22" width="22" height="10" rx="2" />
-      <path d="M17 30l5-6M24 30l5-6" />
-      <rect x="80" y="22" width="16" height="11" rx="2" />
-      <circle cx="46" cy="44" r="17" />
-      <circle cx="46" cy="44" r="11" />
-      <circle cx="46" cy="44" r="5" />
-      <path d="M43.2 42.2a3.4 3.4 0 0 1 2.6-1.6" />
-      <rect x="0" y="24" width="4" height="8" rx="1" />
-      <circle cx="98" cy="52" r="9" />
-      <path d="M98 52L93.4 47.4" />
-      
-      
-      <path d="M90.58 44.58L88.81 42.81" />
-      <path class="camera__leader" d="M88.81 42.81L122 20H126" stroke-width="1" />
-      
-      <path d="M98 41.5L98 39" />
-      <path class="camera__leader" d="M98 39L122 31H126" stroke-width="1" />
-      
-      <path d="M105.42 44.58L107.19 42.81" />
-      <path class="camera__leader" d="M107.19 42.81L122 42H126" stroke-width="1" />
-      
-      <path d="M108.5 52L111 52" />
-      <path class="camera__leader" d="M111 52L122 53H126" stroke-width="1" />
-      
+    <svg class="camera__drawing" viewBox="0 0 300 126" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <defs>
+        <pattern id="camera-hatch" width="2.6" height="2.6" patternUnits="userSpaceOnUse" patternTransform="rotate(-30)"><path d="M0 1.3H2.6" stroke="currentColor" stroke-width="0.3" opacity="0.5" /></pattern>
+      </defs>
+      <g class="camera__front">
+        <path d="M6 14V23.380000000000003H110V14H54.88V12H6Z" fill="url(#camera-hatch)" stroke="none" />
+        <rect x="6" y="62.38" width="104" height="3.79" fill="url(#camera-hatch)" stroke="none" />
+        <path d="M6 23.380000000000003H110M6 62.38H110" stroke-width="0.3" />
+        <path d="M21.22 12v-3h7v3" />
+        <path d="M21.72 9a3 3 0 0 1 6 0" fill="currentColor" />
+        <path d="M36.42 12v-4h13v4" />
+        <path d="M36.42 9.4h13" stroke-width="0.3" />
+        <path d="M6 66.17V12H54.88V14H110V66.17Z" stroke-width="0.7" />
+        <rect x="3.5" y="24.38" width="2.5" height="5" stroke-width="0.5" />
+        <rect x="110" y="24.38" width="2.5" height="5" stroke-width="0.5" />
+        <rect x="66.32" y="16.5" width="15.6" height="4.38" fill="var(--color-bg)" />
+        <path d="M67.52 17.23H80.72" stroke-width="0.3" /><path d="M67.52 17.96H80.72" stroke-width="0.3" /><path d="M67.52 18.69H80.72" stroke-width="0.3" /><path d="M67.52 19.42H80.72" stroke-width="0.3" /><path d="M67.52 20.15H80.72" stroke-width="0.3" />
+        <rect x="89.2" y="16.5" width="12.48" height="4.38" fill="var(--color-bg)" />
+        <rect x="91.7" y="18.3" width="7.48" height="0.78" rx="0.8" stroke-width="0.5" />
+        <path d="M92.4 18.43H98.48" stroke-width="0.3" /><path d="M92.4 18.56H98.48" stroke-width="0.3" /><path d="M92.4 18.69H98.48" stroke-width="0.3" /><path d="M92.4 18.82H98.48" stroke-width="0.3" /><path d="M92.4 18.95H98.48" stroke-width="0.3" />
+        <circle cx="71.1" cy="42.34" r="16.79" fill="var(--color-bg)" />
+        <circle cx="71.1" cy="42.34" r="15.19" stroke-width="0.3" />
+        <circle cx="71.1" cy="42.34" r="12.09" />
+        <circle cx="71.1" cy="42.34" r="7.56" stroke-width="0.5" />
+        <rect x="66.73" y="38.98" width="8.73" height="6.72" rx="1" stroke-width="0.5" />
+        <path d="M69.09 42a2.35 2.35 0 0 1 1.68 -1.68" stroke-width="0.3" />
+        <circle cx="24.2" cy="35.29" r="2.6" stroke-width="0.5" />
+      </g>
+      <g class="camera__plan">
+        <rect x="6" y="82.17" width="104" height="31.2" fill="url(#camera-hatch)" stroke="none" />
+        <path d="M54.88 82.17V113.37" stroke-width="0.3" />
+        <rect x="55.99" y="78.17" width="30.22" height="4" fill="var(--color-bg)" />
+        <rect x="90.7" y="113.37" width="9.48" height="1.6" fill="var(--color-bg)" stroke-width="0.5" />
+        <rect x="6" y="82.17" width="104" height="31.2" stroke-width="0.7" />
+        <circle cx="24.72" cy="94.65" r="3.4" fill="var(--color-bg)" />
+        <circle cx="24.72" cy="94.65" r="2" fill="currentColor" stroke="none" />
+        <circle cx="42.92" cy="97.77" r="8.11" fill="var(--color-bg)" />
+        <circle cx="42.92" cy="97.77" r="6.51" stroke-width="0.3" />
+        <path d="M42.92 97.77L42.92 102.88" stroke-width="0.5" />
+        <path d="M42.92 107.08L42.92 108.88" />
+      </g>
+      <path d="M110 68.17V80.17" stroke-width="0.3" stroke-dasharray="1 2" opacity="0.6" />
+      <g class="camera__annotation">
+        <circle cx="42.92" cy="97.77" r="11.11" />
+        <path class="camera__wedge" d="M48.14 87.96L141.71 41.93A30 30 0 0 0 141.71 82.07L48.14 107.58A11.11 11.11 0 0 0 48.14 87.96Z" stroke-width="0.5" />
+      </g>
+      <g class="camera__detail">
+        <circle cx="164" cy="62" r="30" fill="var(--color-bg)" />
+        <circle cx="164" cy="62" r="27.6" stroke-width="0.3" />
+        <path d="M164 30L164 26" stroke-width="1.4" />
+        
+        <text class="camera__face camera__face--off" x="164" y="53" transform="rotate(-90 164 53)">OFF</text>
+        
+        <text class="camera__face" x="158.71" y="54.72" transform="rotate(-126 158.71 54.72)">STD</text>
+        
+        <text class="camera__face" x="155.44" y="59.22" transform="rotate(-162 155.44 59.22)">VTG1</text>
+        
+        <text class="camera__face" x="155.44" y="64.78" transform="rotate(162 155.44 64.78)">VTG2</text>
+        
+        <text class="camera__face" x="158.71" y="69.28" transform="rotate(126 158.71 69.28)">B&amp;W</text>
+        
+      </g>
+      <g class="camera__annotation">
+        
+        <circle cx="146.37" cy="37.73" r="1" class="camera__dot" stroke="none" />
+        <path d="M146.37 37.73L141.66 31.26A38 38 0 0 1 188.43 32.89H204" stroke-width="0.5" />
+        
+        <circle cx="135.47" cy="52.73" r="1" class="camera__dot" stroke="none" />
+        <path d="M135.47 52.73L131.66 51.49A34 34 0 0 1 194.81 47.63H204" stroke-width="0.5" />
+        
+        <circle cx="135.47" cy="71.27" r="1" class="camera__dot" stroke="none" />
+        <path d="M135.47 71.27L131.66 72.51A34 34 0 0 0 194.81 76.37H204" stroke-width="0.5" />
+        
+        <circle cx="146.37" cy="86.27" r="1" class="camera__dot" stroke="none" />
+        <path d="M146.37 86.27L141.66 92.74A38 38 0 0 0 188.43 91.11H204" stroke-width="0.5" />
+        
+      </g>
     </svg>
+    <span class="camera__view" style="top: 58.07%; left: 3%">Front</span>
+    <span class="camera__view" style="top: 95.53%; left: 3%">Top</span>
     <ol class="camera__callouts">
       
-      <li class="camera__callout" style="top: 27.78%; left: 71.11%"><span class="camera__mode">STD</span><span class="camera__arrow" aria-hidden="true">→</span><code>std.flt</code></li>
+      <li class="camera__callout" style="top: 26.1%; left: 68.67%"><span class="camera__mode">STD</span><span class="camera__arrow" aria-hidden="true">→</span><code>std.flt</code></li>
       
-      <li class="camera__callout" style="top: 43.06%; left: 71.11%"><span class="camera__mode">VTG1</span><span class="camera__arrow" aria-hidden="true">→</span><code>vtg1.flt</code></li>
+      <li class="camera__callout" style="top: 37.8%; left: 68.67%"><span class="camera__mode">VTG1</span><span class="camera__arrow" aria-hidden="true">→</span><code>vtg1.flt</code></li>
       
-      <li class="camera__callout" style="top: 58.33%; left: 71.11%"><span class="camera__mode">VTG2</span><span class="camera__arrow" aria-hidden="true">→</span><code>vtg2.flt</code></li>
+      <li class="camera__callout" style="top: 60.61%; left: 68.67%"><span class="camera__mode">VTG2</span><span class="camera__arrow" aria-hidden="true">→</span><code>vtg2.flt</code></li>
       
-      <li class="camera__callout" style="top: 73.61%; left: 71.11%"><span class="camera__mode">B&amp;W</span><span class="camera__arrow" aria-hidden="true">→</span><code>bw.flt</code></li>
+      <li class="camera__callout" style="top: 72.31%; left: 68.67%"><span class="camera__mode">B&amp;W</span><span class="camera__arrow" aria-hidden="true">→</span><code>bw.flt</code></li>
       
     </ol>
   </div>
-  <figcaption class="visually-hidden">The CampSnap Pro's mode dial. Each of its four positions reads one file from the memory card.</figcaption>
+  <figcaption class="visually-hidden">The CampSnap Pro from the front and from above. The filter dial on the top plate has an off position and four looks; each look reads one file from the memory card.</figcaption>
 </figure>
 
       </section>
