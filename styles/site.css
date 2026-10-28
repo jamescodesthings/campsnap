@@ -2108,7 +2108,9 @@ html {
 
 @media (orientation: landscape) and (min-width: 900px) and (min-height: 560px) {
   :root {
-    --stage-h: calc(100svh - var(--header-h));
+    /* The stage fills the viewport under the header, but never less than the index needs for all 23 filters at
+       their smallest rows, so the list is never clipped: on a short window the page scrolls over the archive. */
+    --stage-h: max(calc(100svh - var(--header-h)), calc(23 * 30px + 7rem));
     --edge: max(var(--gutter), (100vw - var(--max-width)) / 2 + var(--gutter));
   }
 
@@ -2258,8 +2260,7 @@ html {
     min-height: 0;
     margin: var(--space-sm) calc(-1 * var(--space-sm)) 0;
     padding-inline: var(--space-sm);
-    overflow-y: auto;
-    scrollbar-width: thin;
+    overflow: visible;
   }
 
   .index__link {
