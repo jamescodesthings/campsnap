@@ -1411,8 +1411,22 @@ html {
 
 .camera__frame {
   position: relative;
-  aspect-ratio: 300 / 126;
   container-type: inline-size;
+}
+
+/* One frame at a time: the pop-out sits under the views on phones and to their right from 40rem up. */
+.camera__frame--wide {
+  display: none;
+}
+
+@media (min-width: 40rem) {
+  .camera__frame--wide {
+    display: block;
+  }
+
+  .camera__frame--stack {
+    display: none;
+  }
 }
 
 .camera__drawing {
