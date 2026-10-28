@@ -1414,19 +1414,10 @@ html {
   container-type: inline-size;
 }
 
-/* One frame at a time: the pop-out sits under the views on phones and to their right from 40rem up. */
+/* One frame at a time: the stacked drawing everywhere the page is in its stack layout (phones, tablets held
+   upright, phones held sideways); the wide one only on the desk layout, which switches it on below. */
 .camera__frame--wide {
   display: none;
-}
-
-@media (min-width: 40rem) {
-  .camera__frame--wide {
-    display: block;
-  }
-
-  .camera__frame--stack {
-    display: none;
-  }
 }
 
 .camera__drawing {
@@ -2218,6 +2209,15 @@ html {
   .hero__buttons .btn {
     flex: 0 0 auto;
     min-width: 8.5rem;
+  }
+
+  /* The camera blueprint: the wide frame on desk, the stacked one everywhere else. */
+  .camera__frame--wide {
+    display: block;
+  }
+
+  .camera__frame--stack {
+    display: none;
   }
 
   /* The archive. */
