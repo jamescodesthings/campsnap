@@ -1719,7 +1719,7 @@ html {
 
 .tag-row__label {
   flex: none;
-  width: 3.25rem;
+  width: 6.5rem;
   padding-top: 0.45rem;
   font-family: var(--font-mono);
   font-size: var(--text-xs);
@@ -1811,9 +1811,10 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 48px;
+  /* Shorter than a tap target, so the four read as a row of files rather than buttons; 40px keeps the thumb happy. */
+  min-height: 40px;
   font-family: var(--font-mono);
-  font-size: var(--text-small);
+  font-size: var(--text-xs);
   font-weight: 600;
   color: var(--color-heading);
   text-decoration: none;
